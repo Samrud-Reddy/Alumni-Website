@@ -1,13 +1,20 @@
-const express = require("express")
+import express, { Request, Response } from 'express';
+import * as path from 'path';
 
-const app = express()
+const app = express();
 
-const port = 3000
 
-app.get('/', (req: any, res: any) => {
-    res.send("Hello World")
-})
+app.set('view engine', 'ejs'); // set the view engine to EJS
+app.set('views', __dirname + '\\view'); // set the directory for the view templates
 
-app.listen(port, () => {
-    console.log("App Running")
-})
+app.use('/styles', express.static(path.join(__dirname, 'static/styles')));
+
+app.get('/', (req: Request, res: Response) => {
+  const data = { title: 'My EJS App', message: 'Hello, World!' };
+  res.render('index', data); // render the 'index.ejs' template with the data
+});
+
+
+app.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});
