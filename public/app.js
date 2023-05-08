@@ -32,6 +32,9 @@ const app = (0, express_1.default)();
 app.set('view engine', 'ejs'); // set the view engine to EJS
 app.set('views', __dirname + '\\view'); // set the directory for the view templates
 app.use('/styles', express_1.default.static(path.join(__dirname, 'static/styles')));
+app.use('/files', express_1.default.static(path.join(__dirname, 'static/files')));
+app.use('/scripts', express_1.default.static(path.join(__dirname, 'scripts')));
+app.use(express_1.default.static(path.join(__dirname, 'scripts')));
 app.get('/', (req, res) => {
     const data = { title: 'My EJS App', message: 'Hello, World!' };
     res.render('index', data); // render the 'index.ejs' template with the data
