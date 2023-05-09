@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 import {getRandomValues, createHash} from "crypto";
 
-let states = require("../helper/states.js");
+import {add as stateAdd} from "../helper/states.js";
 
 const router = express.Router();
 
@@ -49,7 +49,7 @@ router.get("/", (req: Request, res: Response) => {
 
 	auth_url = auth_url + search_querys.toString();
 
-	states.add(state);
+	stateAdd(state);
 
 	res.redirect(auth_url);
 });

@@ -4,17 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-let states = require("../helper/states.js");
-const PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
-const url = `http://localhost:${PORT}`;
-const client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0 : _b.toString()) || "";
-const client_secret = ((_c = process.env.CLIENT_SECRET) === null || _c === void 0 ? void 0 : _c.toString()) || "";
-router.get("/", (req, res, next) => {
-    if (states.has(req.query.state)) {
-        states.remove(req.query.state);
-        let x = fetch("https://oauth2.googleapis.com/token", {
+var express_1 = __importDefault(require("express"));
+var router = express_1.default.Router();
+var states_js_1 = require("../helper/states.js");
+var PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
+var url = "http://localhost:".concat(PORT);
+var client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0 : _b.toString()) || "";
+var client_secret = ((_c = process.env.CLIENT_SECRET) === null || _c === void 0 ? void 0 : _c.toString()) || "";
+router.get("/", function (req, res, next) {
+    var _a;
+    var state = ((_a = req.query.state) === null || _a === void 0 ? void 0 : _a.toString()) || "";
+    if ((0, states_js_1.has)(state)) {
+        (0, states_js_1.remove)(state);
+        var x = fetch("https://oauth2.googleapis.com/token", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -27,15 +29,15 @@ router.get("/", (req, res, next) => {
                 grant_type: "authorization_code",
             }),
         });
-        x.then((response) => response.json())
-            .then((data) => {
+        x.then(function (response) { return response.json(); })
+            .then(function (data) {
             res.cookie("JWT", data.id_token, {
                 maxAge: 10 * 60 * 1000,
                 httpOnly: true,
             });
             res.redirect(url);
         })
-            .catch((error) => console.error(error));
+            .catch(function (error) { return console.error(error); });
     }
     else {
         res.redirect("login");

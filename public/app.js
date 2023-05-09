@@ -27,14 +27,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const path = __importStar(require("path"));
+var express_1 = __importDefault(require("express"));
+var path = __importStar(require("path"));
 require("dotenv").config();
-const { OAuth2Client } = require("google-auth-library");
-const cookieParser = require("cookie-parser");
-const app = (0, express_1.default)();
-const PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
-const url = `http://localhost:${PORT}`;
+var OAuth2Client = require("google-auth-library").OAuth2Client;
+var cookieParser = require("cookie-parser");
+var app = (0, express_1.default)();
+var PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
+var url = "http://localhost:".concat(PORT);
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 app.use(express_1.default.json());
@@ -44,9 +44,9 @@ app.use("/files", express_1.default.static(path.join(__dirname, "static/files"))
 app.use("/scripts", express_1.default.static(path.join(__dirname, "scripts")));
 app.use(express_1.default.static(path.join(__dirname, "scripts")));
 //apps without verification requirments
-const Login = require("./routes/login.js");
+var Login = require("./routes/login.js");
 app.use("/login", Login);
-const Callback = require("./routes/callback.js");
+var Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
 function verify_request(req, res, next) {
     if (req.cookies.my_JWT) {
@@ -60,12 +60,12 @@ function verify_request(req, res, next) {
     res.redirect("login");
 }
 //with auth requirments
-const Home = require("./routes/home.js");
+var Home = require("./routes/home.js");
 app.use("/", Home);
-app.listen(3000, () => {
+app.listen(3000, function () {
     console.log("Server is listening on port:- " + PORT);
-    console.log(`URL: ${url}`);
+    console.log("URL: ".concat(url));
 });
-app.use((req, res) => {
+app.use(function (req, res) {
     res.send("FAIL");
 });
