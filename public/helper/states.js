@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove = exports.has = exports.add = void 0;
+exports.remove = exports.has = exports.add = exports.make_random_num = void 0;
 var fs_1 = __importDefault(require("fs"));
 function readStates() {
     var _a;
@@ -31,8 +31,28 @@ function write(x) {
             throw err;
     });
 }
-function add(x) {
+var crypto_1 = require("crypto");
+function make_random_num(x) {
+    var state;
+    var randomnumber = (0, crypto_1.getRandomValues)(new BigInt64Array(x || 16));
+    state =
+        (0, crypto_1.createHash)("sha256")
+            .update(randomnumber.slice(0, randomnumber.length / 2).toString())
+            .digest("base64url")
+            .toString() +
+            (0, crypto_1.createHash)("sha256")
+                .update(randomnumber
+                .slice(randomnumber.length / 2, randomnumber.length)
+                .toString())
+                .digest("base64url")
+                .toString();
+    return state;
+}
+exports.make_random_num = make_random_num;
+function add() {
+    var x = make_random_num(16);
     appendStates(x);
+    return x;
 }
 exports.add = add;
 function has(x) {

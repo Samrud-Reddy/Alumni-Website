@@ -31,7 +31,7 @@ router.get("/", function (req, res, next) {
         });
         x.then(function (response) { return response.json(); })
             .then(function (data) {
-            res.cookie("JWT", data.id_token, {
+            res.cookie("JWT_from_ggl", data.id_token, {
                 maxAge: 10 * 60 * 1000,
                 httpOnly: true,
             });
