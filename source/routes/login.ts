@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 import {getRandomValues, createHash} from "crypto";
 
-let states = require("C:\\Users\\samru\\Desktop\\Code\\Alumini Website\\Code\\public\\helper\\states.js");
+let states = require("../helper/states.js");
 
 const router = express.Router();
 

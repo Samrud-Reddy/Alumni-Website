@@ -6,7 +6,7 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const crypto_1 = require("crypto");
-let states = require("C:\\Users\\samru\\Desktop\\Code\\Alumini Website\\Code\\public\\helper\\states.js");
+let states = require("../helper/states.js");
 const router = express_1.default.Router();
 const PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
 const url = `http://localhost:${PORT}`;

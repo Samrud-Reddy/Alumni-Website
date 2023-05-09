@@ -6,7 +6,7 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
-let states = require("C:\\Users\\samru\\Desktop\\Code\\Alumini Website\\Code\\public\\helper\\states.js");
+let states = require("../helper/states.js");
 const PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
 const url = `http://localhost:${PORT}`;
 const client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0 : _b.toString()) || "";
@@ -29,7 +29,10 @@ router.get("/", (req, res, next) => {
         });
         x.then((response) => response.json())
             .then((data) => {
-            res.cookie("JWT", data.id_token);
+            res.cookie("JWT", data.id_token, {
+                maxAge: 10 * 60 * 1000,
+                httpOnly: true,
+            });
             res.redirect(url);
         })
             .catch((error) => console.error(error));

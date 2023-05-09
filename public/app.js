@@ -48,11 +48,22 @@ const Login = require("./routes/login.js");
 app.use("/login", Login);
 const Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
+function verify_request(req, res, next) {
+    if (req.cookies.my_JWT) {
+        //verify the signature of our JWT
+        next();
+    }
+    if (req.cookies.JWT) {
+        //create a new JWT made by us, using googles JWT
+        next();
+    }
+    res.redirect("login");
+}
 //with auth requirments
 const Home = require("./routes/home.js");
 app.use("/", Home);
 app.listen(3000, () => {
-    console.log("Server is listening on port" + PORT);
+    console.log("Server is listening on port:- " + PORT);
     console.log(`URL: ${url}`);
 });
 app.use((req, res) => {

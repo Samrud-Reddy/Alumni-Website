@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 const router = express.Router();
 
-let states = require("C:\\Users\\samru\\Desktop\\Code\\Alumini Website\\Code\\public\\helper\\states.js");
+let states = require("../helper/states.js");
 
 const PORT: string = process.env.PORT?.toString() || "3000";
 
@@ -29,7 +29,10 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 		x.then((response) => response.json())
 			.then((data) => {
-				res.cookie("JWT", data.id_token);
+				res.cookie("JWT", data.id_token, {
+					maxAge: 10 * 60 * 1000,
+					httpOnly: true,
+				});
 				res.redirect(url);
 			})
 			.catch((error) => console.error(error));
