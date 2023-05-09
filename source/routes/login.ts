@@ -1,7 +1,6 @@
 import express, {Request, Response, NextFunction, Router} from "express";
-import {getRandomValues, createHash} from "crypto";
 
-import {add as stateAdd} from "../helper/states.js";
+import {add as stateAdd, make_random_num} from "../helper/states.js";
 
 const router = express.Router();
 
@@ -13,28 +12,7 @@ const client_id: string = process.env.CLIENT_ID?.toString() || "";
 const client_secret: string = process.env.CLIENT_SECRET?.toString() || "";
 
 router.get("/", (req: Request, res: Response) => {
-	function make_random_num(x?: number): string {
-		let state: string;
-		let randomnumber = getRandomValues(new BigInt64Array(x || 16));
-
-		state =
-			createHash("sha256")
-				.update(randomnumber.slice(0, randomnumber.length / 2).toString())
-				.digest("base64url")
-				.toString() +
-			createHash("sha256")
-				.update(
-					randomnumber
-						.slice(randomnumber.length / 2, randomnumber.length)
-						.toString()
-				)
-				.digest("base64url")
-				.toString();
-
-		return state;
-	}
-
-	let state = make_random_num();
+	let state = stateAdd();
 	let callback = url + "/callback";
 
 	let auth_url = "https://accounts.google.com/o/oauth2/v2/auth?";
@@ -48,8 +26,6 @@ router.get("/", (req: Request, res: Response) => {
 	});
 
 	auth_url = auth_url + search_querys.toString();
-
-	stateAdd(state);
 
 	res.redirect(auth_url);
 });

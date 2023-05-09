@@ -30,7 +30,7 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 		x.then((response) => response.json())
 			.then((data) => {
-				res.cookie("JWT", data.id_token, {
+				res.cookie("JWT_from_ggl", data.id_token, {
 					maxAge: 10 * 60 * 1000,
 					httpOnly: true,
 				});

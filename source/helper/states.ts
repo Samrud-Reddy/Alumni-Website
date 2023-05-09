@@ -32,8 +32,32 @@ function write(x: string): void {
 	});
 }
 
-export function add(x: string): void {
+import {getRandomValues, createHash} from "crypto";
+export function make_random_num(x?: number): string {
+	let state: string;
+	let randomnumber = getRandomValues(new BigInt64Array(x || 16));
+
+	state =
+		createHash("sha256")
+			.update(randomnumber.slice(0, randomnumber.length / 2).toString())
+			.digest("base64url")
+			.toString() +
+		createHash("sha256")
+			.update(
+				randomnumber
+					.slice(randomnumber.length / 2, randomnumber.length)
+					.toString()
+			)
+			.digest("base64url")
+			.toString();
+
+	return state;
+}
+
+export function add(): string {
+	let x = make_random_num(16);
 	appendStates(x);
+	return x;
 }
 
 export function has(x: string): boolean {
