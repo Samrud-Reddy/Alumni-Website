@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.remove = exports.has = exports.add = exports.make_random_num = void 0;
+exports.States = exports.make_random_num = void 0;
 var fs_1 = __importDefault(require("fs"));
 function readStates() {
     var _a;
@@ -49,20 +49,19 @@ function make_random_num(x) {
     return state;
 }
 exports.make_random_num = make_random_num;
-function add() {
-    var x = make_random_num(16);
-    appendStates(x);
-    return x;
-}
-exports.add = add;
-function has(x) {
-    var states = readStates();
-    return states.includes(x);
-}
-exports.has = has;
-function remove(x) {
-    var states = readStates();
-    states = states.filter(function (item) { return item !== x; });
-    write(JSON.stringify(states));
-}
-exports.remove = remove;
+exports.States = {
+    add: function () {
+        var x = make_random_num(16);
+        appendStates(x);
+        return x;
+    },
+    has: function (x) {
+        var states = readStates();
+        return states.includes(x);
+    },
+    remove: function (x) {
+        var states = readStates();
+        states = states.filter(function (item) { return item !== x; });
+        write(JSON.stringify(states));
+    },
+};

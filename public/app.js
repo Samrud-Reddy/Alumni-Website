@@ -25,20 +25,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var path = __importStar(require("path"));
 require("dotenv").config();
-var OAuth2Client = require("google-auth-library").OAuth2Client;
 var cookieParser = require("cookie-parser");
 var app = (0, express_1.default)();
-var PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
-var url = "http://localhost:".concat(PORT);
+var PORT = parseInt(((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000");
+var SECRET_KEY = ((_b = process.env.SECRET_KEY) === null || _b === void 0 ? void 0 : _b.toString()) || " ";
+var URL = ((_c = process.env.URL) === null || _c === void 0 ? void 0 : _c.toString()) || "localhost";
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 app.use(express_1.default.json());
 app.use(cookieParser());
+app.use("/favicon.ico", function (req, res, next) {
+    res.sendFile(__dirname + "/static/files/inv logo.ico");
+});
 app.use("/styles", express_1.default.static(path.join(__dirname, "static/styles")));
 app.use("/files", express_1.default.static(path.join(__dirname, "static/files")));
 app.use("/scripts", express_1.default.static(path.join(__dirname, "scripts")));
@@ -48,23 +51,54 @@ var Login = require("./routes/login.js");
 app.use("/login", Login);
 var Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
+var jwt_funcs_js_1 = require("./helper/jwt_funcs.js");
+var states_js_1 = require("./helper/states.js");
+var jsonwebtoken_1 = require("jsonwebtoken");
 function verify_request(req, res, next) {
     if (req.cookies.my_JWT) {
         //verify the signature of our JWT
-        next();
+        try {
+            (0, jsonwebtoken_1.verify)(req.cookies.my_JWT, SECRET_KEY, {});
+            console.log("s");
+            next();
+            return;
+        }
+        catch (err) {
+            console.log(err);
+            res.cookie("my_JWT", "sdo", { maxAge: -3000 });
+            res.redirect("/login");
+            return;
+        }
     }
-    if (req.cookies.JWT) {
+    if (req.cookies.JWT_from_ggl) {
         //create a new JWT made by us, using googles JWT
-        next();
+        (0, jwt_funcs_js_1.verify_google_JWT)(req.cookies.JWT_from_ggl).then(function (data) {
+            //valid jwt token
+            if (data) {
+                var state = states_js_1.States.add();
+                res.redirect("signup/" + state);
+            }
+            else {
+                res.send("FAILED");
+            }
+            //invalid jwt token
+        });
+        return;
     }
+    //user not authenticated
     res.redirect("login");
 }
+var Signup = require("./routes/signup.js");
+app.use("/signup", Signup);
 //with auth requirments
 var Home = require("./routes/home.js");
-app.use("/", Home);
-app.listen(3000, function () {
-    console.log("Server is listening on port:- " + PORT);
-    console.log("URL: ".concat(url));
+app.use("//", verify_request, Home);
+app.get("/ssss", function (req, res) {
+    res.render("login");
+});
+app.listen(PORT, URL, function () {
+    console.log("Server is listening on " + URL + " on " + PORT);
+    console.log("URL: ".concat(URL + ":" + PORT));
 });
 app.use(function (req, res) {
     res.send("FAIL");

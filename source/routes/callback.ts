@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 const router = express.Router();
 
-import {has as stateHas, remove as stateRemove} from "../helper/states.js";
+import {States} from "../helper/states.js";
 
 const PORT: string = process.env.PORT?.toString() || "3000";
 
@@ -11,9 +11,10 @@ const client_id: string = process.env.CLIENT_ID?.toString() || "";
 const client_secret: string = process.env.CLIENT_SECRET?.toString() || "";
 
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
+	console.log(req.query);
 	let state: string = req.query.state?.toString() || "";
-	if (stateHas(state)) {
-		stateRemove(state);
+	if (States.has(state)) {
+		States.remove(state);
 		let x = fetch("https://oauth2.googleapis.com/token", {
 			method: "POST",
 			headers: {

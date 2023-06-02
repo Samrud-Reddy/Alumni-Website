@@ -12,7 +12,7 @@ var url = "http://localhost:".concat(PORT);
 var client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0 : _b.toString()) || "";
 var client_secret = ((_c = process.env.CLIENT_SECRET) === null || _c === void 0 ? void 0 : _c.toString()) || "";
 router.get("/", function (req, res) {
-    var state = (0, states_js_1.add)();
+    var state = states_js_1.States.add();
     var callback = url + "/callback";
     var auth_url = "https://accounts.google.com/o/oauth2/v2/auth?";
     var search_querys = new URLSearchParams({

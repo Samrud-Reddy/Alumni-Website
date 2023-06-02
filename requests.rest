@@ -1,9 +1,0 @@
-POST /token HTTP/1.1
-Host: oauth2.googleapis.com
-Content-Type: application/x-www-form-urlencoded
-
-code=4/0AbUR2VPjmrJy0cv932Lgw8Lftme3C554tni-YLsL4uVXIJ2cRGXz463oefWHAdbjGXk2Og&
-client_id=1009226817611-1hdu6omi5mua56h3fjcuvsgkuc5kagn4.apps.googleusercontent.com&
-client_secret=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&
-redirect_uri=http://localhost:3000/&
-grant_type=authorization_code

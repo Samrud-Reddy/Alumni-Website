@@ -1,13 +1,8 @@
-declare module "add" {
-	export function add(): string;
-}
-
-declare module "has" {
-	export function has(item: string): boolean;
-}
-
-declare module "remove" {
-	export function remove(item: string): void;
+export let States: States;
+interface States {
+	add(): string;
+	has(x: string): boolean;
+	remove(x: string): void;
 }
 
 declare module "make_random_num" {

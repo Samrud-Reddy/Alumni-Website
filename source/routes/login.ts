@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 
-import {add as stateAdd, make_random_num} from "../helper/states.js";
+import {States, make_random_num} from "../helper/states.js";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const client_id: string = process.env.CLIENT_ID?.toString() || "";
 const client_secret: string = process.env.CLIENT_SECRET?.toString() || "";
 
 router.get("/", (req: Request, res: Response) => {
-	let state = stateAdd();
+	let state = States.add();
 	let callback = url + "/callback";
 
 	let auth_url = "https://accounts.google.com/o/oauth2/v2/auth?";

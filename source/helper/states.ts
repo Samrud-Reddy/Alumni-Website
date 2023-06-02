@@ -54,20 +54,26 @@ export function make_random_num(x?: number): string {
 	return state;
 }
 
-export function add(): string {
-	let x = make_random_num(16);
-	appendStates(x);
-	return x;
+interface States {
+	add(): string;
+	has(x: string): boolean;
+	remove(x: string): void;
 }
 
-export function has(x: string): boolean {
-	let states = readStates();
-	return states.includes(x);
-}
+export let States: States = {
+	add(): string {
+		let x = make_random_num(16);
+		appendStates(x);
+		return x;
+	},
+	has(x: string): boolean {
+		let states = readStates();
+		return states.includes(x);
+	},
+	remove(x: string): void {
+		let states = readStates();
 
-export function remove(x: string): void {
-	let states = readStates();
-
-	states = states.filter((item: string) => item !== x);
-	write(JSON.stringify(states));
-}
+		states = states.filter((item: string) => item !== x);
+		write(JSON.stringify(states));
+	},
+};

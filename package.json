@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build_typescript": "tsc",
-    "watch_typescript": "tsc -w",
+    "build_tsc": "tsc",
+    "watch_tsc": "tsc -w",
     "run_once": "node public/app.js",
     "run": "nodemon public/app.js --ignore 'public/states.json'",
     "build_sass": "sass source/static/styles:public/static/styles --style=compressed",
