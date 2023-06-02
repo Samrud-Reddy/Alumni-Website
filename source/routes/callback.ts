@@ -11,7 +11,6 @@ const client_id: string = process.env.CLIENT_ID?.toString() || "";
 const client_secret: string = process.env.CLIENT_SECRET?.toString() || "";
 
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
-	console.log(req.query);
 	let state: string = req.query.state?.toString() || "";
 	if (States.has(state)) {
 		States.remove(state);

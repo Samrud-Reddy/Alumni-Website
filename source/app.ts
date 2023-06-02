@@ -14,6 +14,10 @@ const URL: string = process.env.URL?.toString() || "localhost";
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 
+app.use((req, res, next) => {
+	console.log(req.url);
+	next();
+});
 app.use(express.json());
 app.use(cookieParser());
 
@@ -55,19 +59,20 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 	if (req.cookies.JWT_from_ggl) {
 		//create a new JWT made by us, using googles JWT
 		verify_google_JWT(req.cookies.JWT_from_ggl).then((data) => {
+			console.log(data);
 			//valid jwt token
 			if (data) {
 				let state = States.add();
-				res.redirect("signup/" + state);
+				res.redirect("signup/" + state + "?redirect=" + req.url);
 			} else {
-				res.send("FAILED");
+				res.send("FA ILED");
 			}
 			//invalid jwt token
 		});
 		return;
 	}
 	//user not authenticated
-	res.redirect("login");
+	res.redirect("ssss");
 }
 
 const Signup = require("./routes/signup.js");

@@ -37,6 +37,10 @@ var SECRET_KEY = ((_b = process.env.SECRET_KEY) === null || _b === void 0 ? void
 var URL = ((_c = process.env.URL) === null || _c === void 0 ? void 0 : _c.toString()) || "localhost";
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
+app.use(function (req, res, next) {
+    console.log(req.url);
+    next();
+});
 app.use(express_1.default.json());
 app.use(cookieParser());
 app.use("/favicon.ico", function (req, res, next) {
@@ -73,20 +77,21 @@ function verify_request(req, res, next) {
     if (req.cookies.JWT_from_ggl) {
         //create a new JWT made by us, using googles JWT
         (0, jwt_funcs_js_1.verify_google_JWT)(req.cookies.JWT_from_ggl).then(function (data) {
+            console.log(data);
             //valid jwt token
             if (data) {
                 var state = states_js_1.States.add();
-                res.redirect("signup/" + state);
+                res.redirect("signup/" + state + "?redirect=" + req.url);
             }
             else {
-                res.send("FAILED");
+                res.send("FA ILED");
             }
             //invalid jwt token
         });
         return;
     }
     //user not authenticated
-    res.redirect("login");
+    res.redirect("ssss");
 }
 var Signup = require("./routes/signup.js");
 app.use("/signup", Signup);

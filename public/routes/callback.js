@@ -13,7 +13,6 @@ var client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0
 var client_secret = ((_c = process.env.CLIENT_SECRET) === null || _c === void 0 ? void 0 : _c.toString()) || "";
 router.get("/", function (req, res, next) {
     var _a;
-    console.log(req.query);
     var state = ((_a = req.query.state) === null || _a === void 0 ? void 0 : _a.toString()) || "";
     if (states_js_1.States.has(state)) {
         states_js_1.States.remove(state);

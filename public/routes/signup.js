@@ -26,6 +26,6 @@ router.get("/:id", function (req, res, next) {
             httpOnly: true,
         });
     }
-    res.redirect("/");
+    res.redirect(req.params.redirect || "/");
 });
 module.exports = router;

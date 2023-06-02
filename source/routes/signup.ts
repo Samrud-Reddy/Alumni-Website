@@ -31,6 +31,7 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 			httpOnly: true,
 		});
 	}
-	res.redirect("/");
+
+	res.redirect(req.params.redirect || "/");
 });
 module.exports = router;
