@@ -1,3 +1,3 @@
 let login: Function = () => {
-	window.location.replace("../login");
+	window.location.replace("../google_login");
 };

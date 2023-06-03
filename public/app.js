@@ -51,8 +51,8 @@ app.use("/files", express_1.default.static(path.join(__dirname, "static/files"))
 app.use("/scripts", express_1.default.static(path.join(__dirname, "scripts")));
 app.use(express_1.default.static(path.join(__dirname, "scripts")));
 //apps without verification requirments
-var Login = require("./routes/login.js");
-app.use("/login", Login);
+var google_login = require("./routes/google_login.js");
+app.use("/google_login", google_login);
 var Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
 var jwt_funcs_js_1 = require("./helper/jwt_funcs.js");
@@ -69,8 +69,8 @@ function verify_request(req, res, next) {
         }
         catch (err) {
             console.log(err);
-            res.cookie("my_JWT", "sdo", { maxAge: -3000 });
-            res.redirect("/login");
+            res.cookie("my_JWT", "Random string, does not maatter since cookie will be deleted", { maxAge: -3000 });
+            res.redirect("/google_login");
             return;
         }
     }
@@ -81,7 +81,7 @@ function verify_request(req, res, next) {
             //valid jwt token
             if (data) {
                 var state = states_js_1.States.add();
-                res.redirect("signup/" + state + "?redirect=" + req.url);
+                res.redirect("get_my_jwt/" + state + "?redirect=" + req.url);
             }
             else {
                 res.send("FA ILED");
@@ -91,14 +91,14 @@ function verify_request(req, res, next) {
         return;
     }
     //user not authenticated
-    res.redirect("ssss");
+    res.redirect("login");
 }
-var Signup = require("./routes/signup.js");
-app.use("/signup", Signup);
+var get_my_jwt = require("./routes/get_my_jwt.js");
+app.use("/get_my_jwt", get_my_jwt);
 //with auth requirments
 var Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
-app.get("/ssss", function (req, res) {
+app.get("/login", function (req, res) {
     res.render("login");
 });
 app.listen(PORT, URL, function () {

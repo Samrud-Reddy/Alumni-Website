@@ -31,8 +31,8 @@ app.use("/scripts", express.static(path.join(__dirname, "scripts")));
 app.use(express.static(path.join(__dirname, "scripts")));
 
 //apps without verification requirments
-const Login = require("./routes/login.js");
-app.use("/login", Login);
+const google_login = require("./routes/google_login.js");
+app.use("/google_login", google_login);
 
 const Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
@@ -51,8 +51,12 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 			return;
 		} catch (err) {
 			console.log(err);
-			res.cookie("my_JWT", "sdo", {maxAge: -3000});
-			res.redirect("/login");
+			res.cookie(
+				"my_JWT",
+				"Random string, does not maatter since cookie will be deleted",
+				{maxAge: -3000}
+			);
+			res.redirect("/google_login");
 			return;
 		}
 	}
@@ -63,7 +67,7 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 			//valid jwt token
 			if (data) {
 				let state = States.add();
-				res.redirect("signup/" + state + "?redirect=" + req.url);
+				res.redirect("get_my_jwt/" + state + "?redirect=" + req.url);
 			} else {
 				res.send("FA ILED");
 			}
@@ -72,17 +76,17 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 		return;
 	}
 	//user not authenticated
-	res.redirect("ssss");
+	res.redirect("login");
 }
 
-const Signup = require("./routes/signup.js");
-app.use("/signup", Signup);
+const get_my_jwt = require("./routes/get_my_jwt.js");
+app.use("/get_my_jwt", get_my_jwt);
 
 //with auth requirments
 const Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
 
-app.get("/ssss", (req, res) => {
+app.get("/login", (req, res) => {
 	res.render("login");
 });
 
