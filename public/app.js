@@ -29,6 +29,8 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var path = __importStar(require("path"));
+// import * as d from ".\\data_helpers\\mysql.js";
+// let x: void = d.addUser("s");
 require("dotenv").config();
 var cookieParser = require("cookie-parser");
 var app = (0, express_1.default)();

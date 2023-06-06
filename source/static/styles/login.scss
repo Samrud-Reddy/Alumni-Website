@@ -1,38 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 body{
-    background-color: #F3E8EE;
+    background-image: url("https://pbs.twimg.com/media/Fv59ERsakAA52Cy.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-position: center;
 
     height: 100vh;
 
     .box{
         position: relative;
-        min-height: 80vh;
-        max-width: 20rem;
+        height: 90vh;
+        max-width: 25rem;
         background-color: #FF6F01;
         transform: translate(-50%, 0%);
         left: 50%;
-        top: calc((100vh - 80vh) / 2);
-        box-shadow: 0px 0px 5px 10px grey;
+        top: calc(calc(100vh - 90vh) / 2);
+        box-shadow: 0px 0px 5px 10px rgb(0, 0, 0);
         border-radius: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
+
         .head{
-            font-size: 3rem !important;
+            font-size: 4rem !important;
             margin-block: 10%;
         }
 
 
         .button{
             background-color: #07519C;
-            font-size: 1.25rem;
-            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            border-radius: 0.1rem;
             padding: 0.35rem;
             width: 40%;
             border: black solid;
+            color: #f3e8ee;
 
             font-weight: 700;
 
@@ -50,8 +55,10 @@ body{
 
         p{
             font-weight: 100;
+
             margin-inline: 5%;
             width: 80%;
+            font-size: 1rem;
             
         }
 

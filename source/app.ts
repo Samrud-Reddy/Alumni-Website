@@ -1,6 +1,9 @@
 import express, {NextFunction, Request, Response} from "express";
 import * as path from "path";
 import * as fs from "fs";
+// import * as d from ".\\data_helpers\\mysql.js";
+
+// let x: void = d.addUser("s");
 
 require("dotenv").config();
 
