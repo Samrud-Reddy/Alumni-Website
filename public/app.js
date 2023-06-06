@@ -48,9 +48,9 @@ app.use(cookieParser());
 app.use("/favicon.ico", function (req, res, next) {
     res.sendFile(__dirname + "/static/files/inv logo.ico");
 });
-app.use("/styles", express_1.default.static(path.join(__dirname, "static/styles")));
-app.use("/files", express_1.default.static(path.join(__dirname, "static/files")));
-app.use("/scripts", express_1.default.static(path.join(__dirname, "scripts")));
+app.use("*/styles", express_1.default.static(path.join(__dirname, "static/styles")));
+app.use("*/files", express_1.default.static(path.join(__dirname, "static/files")));
+app.use("*/scripts", express_1.default.static(path.join(__dirname, "scripts")));
 app.use(express_1.default.static(path.join(__dirname, "scripts")));
 //apps without verification requirments
 var google_login = require("./routes/google_login.js");
@@ -84,12 +84,12 @@ function verify_request(req, res, next) {
             //valid jwt token
             if (data) {
                 var state = states_js_1.States.add();
-                var get_my_jwt_url = new URL(state, web_url);
-                get_my_jwt_url.searchParams.append("redirect_url", req.url);
+                var get_my_jwt_url = "get_my_jwt/".concat(state, "?redirect_url=");
+                get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
                 //todo, change role to something corrent
-                get_my_jwt_url.searchParams.append("role", "jojo");
+                get_my_jwt_url = "".concat(get_my_jwt_url, "&role=jojo");
                 console.log(get_my_jwt_url);
-                res.redirect(get_my_jwt_url.toString());
+                res.redirect(get_my_jwt_url);
             }
             else {
                 res.send("FA ILED");
@@ -106,9 +106,8 @@ app.use("/get_my_jwt", get_my_jwt);
 //with auth requirments
 var Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
-app.get("/login", function (req, res) {
-    res.render("login");
-});
+var login = require("./routes/login.js");
+app.use("/login", login);
 app.listen(PORT, web_url, function () {
     console.log("Server is listening on " + web_url + " on " + PORT);
     console.log("URL: ".concat(web_url + ":" + PORT));

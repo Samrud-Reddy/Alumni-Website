@@ -6,13 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.States = exports.make_random_num = void 0;
 var fs_1 = __importDefault(require("fs"));
 function readStates() {
-    var _a;
-    var contents = fs_1.default.readFileSync(((_a = require.main) === null || _a === void 0 ? void 0 : _a.path) + "\\states.json", "utf-8");
-    var data = JSON.parse(contents);
-    if (!Array.isArray(data)) {
-        throw new Error("JSON file does not contain a list");
-    }
-    return data;
+    var contents = require("../../states.json");
+    return contents;
 }
 function appendStates(x) {
     var _a;

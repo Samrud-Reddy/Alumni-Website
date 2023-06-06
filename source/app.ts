@@ -28,9 +28,9 @@ app.use("/favicon.ico", (req: Request, res: Response, next: NextFunction) => {
 	res.sendFile(__dirname + "/static/files/inv logo.ico");
 });
 
-app.use("/styles", express.static(path.join(__dirname, "static/styles")));
-app.use("/files", express.static(path.join(__dirname, "static/files")));
-app.use("/scripts", express.static(path.join(__dirname, "scripts")));
+app.use("*/styles", express.static(path.join(__dirname, "static/styles")));
+app.use("*/files", express.static(path.join(__dirname, "static/files")));
+app.use("*/scripts", express.static(path.join(__dirname, "scripts")));
 app.use(express.static(path.join(__dirname, "scripts")));
 
 //apps without verification requirments
@@ -75,14 +75,14 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 			if (data) {
 				let state = States.add();
 
-				let get_my_jwt_url: URL = new URL(state, web_url);
+				let get_my_jwt_url: string = `get_my_jwt/${state}?redirect_url=`;
 
-				get_my_jwt_url.searchParams.append("redirect_url", req.url);
+				get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
 
 				//todo, change role to something corrent
-				get_my_jwt_url.searchParams.append("role", "jojo");
+				get_my_jwt_url = `${get_my_jwt_url}&role=jojo`;
 				console.log(get_my_jwt_url);
-				res.redirect(get_my_jwt_url.toString());
+				res.redirect(get_my_jwt_url);
 			} else {
 				res.send("FA ILED");
 			}
@@ -101,9 +101,8 @@ app.use("/get_my_jwt", get_my_jwt);
 const Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
 
-app.get("/login", (req, res) => {
-	res.render("login");
-});
+const login = require("./routes/login.js");
+app.use("/login", login);
 
 app.listen(PORT, web_url, () => {
 	console.log("Server is listening on " + web_url + " on " + PORT);

@@ -1,17 +1,9 @@
 import fs from "fs";
 
 function readStates(): string[] {
-	const contents = fs.readFileSync(
-		require.main?.path + "\\states.json",
-		"utf-8"
-	);
-	const data = JSON.parse(contents);
+	const contents = require("../../states.json");
 
-	if (!Array.isArray(data)) {
-		throw new Error("JSON file does not contain a list");
-	}
-
-	return data;
+	return contents;
 }
 
 function appendStates(x: string): void {

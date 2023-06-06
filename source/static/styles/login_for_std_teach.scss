@@ -5,18 +5,19 @@ body{
     background-repeat: no-repeat, repeat;
     background-size: cover;
     background-position: center;
+
     height: 100vh;
 
     .box{
         position: relative;
-        height: 90vh;
+        height: 60vh;
         max-width: 25rem;
         background-color: #FF6F01;
         transform: translate(-50%, 0%);
         left: 50%;
-        top: calc(calc(100vh - 90vh) / 2);
-        box-shadow: 0px 0px 5px 10px rgb(0, 0, 0);
-        border-radius: 20px;
+        top: calc(calc(100vh - 60vh) / 2);
+        box-shadow: 0px 0px 15px 12px rgb(0, 0, 0);
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -24,7 +25,7 @@ body{
 
 
         .head{
-            font-size: 4rem !important;
+            font-size: 5rem !important;
             margin-block: 10%;
         }
 
