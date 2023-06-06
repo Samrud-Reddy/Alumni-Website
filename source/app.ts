@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const PORT: number = parseInt(process.env.PORT?.toString() || "3000");
 const SECRET_KEY: string = process.env.SECRET_KEY?.toString() || " ";
-const URL: string = process.env.URL?.toString() || "localhost";
+const web_url: string = process.env.URL?.toString() || "localhost";
 
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
@@ -37,7 +37,7 @@ app.use("/google_login", google_login);
 const Callback = require("./routes/callback.js");
 app.use("/callback", Callback);
 
-import {verify_google_JWT} from "./helper/jwt_funcs.js";
+import {parseJwt, verify_google_JWT} from "./helper/jwt_funcs.js";
 import {States} from "./helper/states.js";
 import {verify} from "jsonwebtoken";
 
@@ -46,7 +46,11 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 		//verify the signature of our JWT
 		try {
 			verify(req.cookies.my_JWT, SECRET_KEY, {});
-			console.log("s");
+
+			let my_jwt_tkn = parseJwt(req.cookies.my_JWT);
+
+			console.log(my_jwt_tkn);
+
 			next();
 			return;
 		} catch (err) {
@@ -56,7 +60,7 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 				"Random string, does not maatter since cookie will be deleted",
 				{maxAge: -3000}
 			);
-			res.redirect("/google_login");
+			res.redirect("/login");
 			return;
 		}
 	}
@@ -67,7 +71,15 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 			//valid jwt token
 			if (data) {
 				let state = States.add();
-				res.redirect("get_my_jwt/" + state + "?redirect=" + req.url);
+
+				let get_my_jwt_url: URL = new URL(state, web_url);
+
+				get_my_jwt_url.searchParams.append("redirect_url", req.url);
+
+				//todo, change role to something corrent
+				get_my_jwt_url.searchParams.append("role", "jojo");
+				console.log(get_my_jwt_url);
+				res.redirect(get_my_jwt_url.toString());
 			} else {
 				res.send("FA ILED");
 			}
@@ -90,9 +102,9 @@ app.get("/login", (req, res) => {
 	res.render("login");
 });
 
-app.listen(PORT, URL, () => {
-	console.log("Server is listening on " + URL + " on " + PORT);
-	console.log(`URL: ${URL + ":" + PORT}`);
+app.listen(PORT, web_url, () => {
+	console.log("Server is listening on " + web_url + " on " + PORT);
+	console.log(`URL: ${web_url + ":" + PORT}`);
 });
 
 app.use((req: Request, res: Response) => {
