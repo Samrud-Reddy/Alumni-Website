@@ -43,6 +43,9 @@ app.use(function (req, res, next) {
     console.log(req.url);
     next();
 });
+app.use(express_1.default.urlencoded({
+    extended: true,
+}));
 app.use(express_1.default.json());
 app.use(cookieParser());
 app.use("/favicon.ico", function (req, res, next) {

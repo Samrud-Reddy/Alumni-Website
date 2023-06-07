@@ -17,4 +17,8 @@ router.get("/std-teach/:user", function (req, res) {
 router.get("/signup", function (req, res) {
     res.render("login/signup");
 });
+router.post("/signup", function (req, res) {
+    console.log(req.body);
+    res.redirect("/login");
+});
 module.exports = router;
