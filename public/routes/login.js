@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var router = express_1.default.Router();
 router.get("/", function (req, res) {
-    res.render("welcome");
+    res.render("login/welcome");
 });
 router.get("/alumini", function (req, res) {
-    res.render("alumini");
+    res.render("login/alumini");
 });
-router.get("/std-teach", function (req, res) {
-    res.render("login_for_std_teach");
+router.get("/std-teach/:user", function (req, res) {
+    res.render("login/login_for_std_teach", { user: req.params.user });
 });
 module.exports = router;
