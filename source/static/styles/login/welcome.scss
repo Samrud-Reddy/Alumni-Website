@@ -6,7 +6,7 @@ body{
     height: 100vh;
     .box{
         background-color: #FF6F01 !important;
-        max-width: 30vw;
+        max-width: 40vw;
         min-height: 40vh;
 
         transform: translate(-50%, -50%);
@@ -26,14 +26,17 @@ body{
         
         
 
-
+        .big{
+            font-size: clamp(0.2rem, 7vw, 6rem);
+            
+        }
         .wrapper{
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: space-around;
             flex-grow: 1;
 
-            border-top: solid 10px black !important;
+            padding: 5%;
         }
 
         button{
@@ -41,17 +44,19 @@ body{
             font-size: min(1.7vw, 2rem) !important;
             border-radius: 1vh;
             padding: 0.3vw;
-            border: black solid;
             color: #f3e8ee;
             flex-grow: 1;
             min-width: 0;
             height: 50%;
             margin-inline: 5%;
+            border: 3px solid black !important;
 
 
         }
         button:hover{
-            opacity: 60%;
+            opacity: 80%;
+            box-shadow: 0px 0px 1px 2px rgb(0, 0, 0);
+
         }
 
         h2{
@@ -60,10 +65,33 @@ body{
             padding-block: 4%;
             padding-inline: 2%;
             font-weight: 400; 
+
+            line-height: 1.5;
+        }
+        .out_of_flow{
+            position: relative;
+            top: 0;
+            width: 100%;
+            border-top: 10px black solid; 
+
+            text-align: center;
+            padding-top: 3%;
+            font-size: max(1.7vw, 1rem) !important;
+
         }
     }
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+
+@media only screen and (width <= 500px) {
+    .wrapper {
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: space-around;
+        margin: 0;
+    }
+}
 
 *{
     font-family: ubuntu, sans-serif;

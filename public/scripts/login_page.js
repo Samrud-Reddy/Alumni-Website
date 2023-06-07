@@ -1,4 +1,7 @@
 "use strict";
 var login = function () {
-    window.location.replace("../google_login");
+    window.location.href = "../google_login";
+};
+var signup = function () {
+    window.location.href = "../login/signup";
 };
