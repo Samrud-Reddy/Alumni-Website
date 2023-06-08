@@ -12,4 +12,13 @@ router.get("/alumini", (req, res) => {
 router.get("/std-teach/:user", (req: Request, res) => {
 	res.render("login/login_for_std_teach", {user: req.params.user});
 });
+
+router.get("/signup", (req: Request, res) => {
+	res.render("login/signup");
+});
+
+router.post("/signup", (req: Request, res) => {
+	console.log(req.body);
+	res.redirect("/login");
+});
 module.exports = router;

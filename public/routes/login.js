@@ -14,4 +14,11 @@ router.get("/alumini", function (req, res) {
 router.get("/std-teach/:user", function (req, res) {
     res.render("login/login_for_std_teach", { user: req.params.user });
 });
+router.get("/signup", function (req, res) {
+    res.render("login/signup");
+});
+router.post("/signup", function (req, res) {
+    console.log(req.body);
+    res.redirect("/login");
+});
 module.exports = router;

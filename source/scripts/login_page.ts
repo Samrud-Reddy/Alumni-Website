@@ -1,3 +1,7 @@
 let login: Function = () => {
-	window.location.replace("../google_login");
+	window.location.href = "../google_login";
+};
+
+let signup: Function = () => {
+	window.location.href = "../login/signup";
 };
