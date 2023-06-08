@@ -4,54 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/login/signup.css">
     <title>Sign Up</title>
 </head>
-<body>
-    <form action="" method="post">
-        <div class="short_text">
-            <label for="fullname">Enter your full name *</label>
-            <input type="text" name="fullname" id="fullname" required>
-        </div>
-        
-        <div class="short_text">
-            <label for="email">Enter your email id *</label>
-            <input type="text" name="email" id="email" pattern=".+@.+\..+" required>
-        </div>
-        
-        <div class="short_text">
-            <label for="gradyear">Enter your grad year *</label>
-            <input type="text" name="gradyear" id="gradyear" pattern="20[0-9][0-9]" required>
-        </div>
-        
-        <div class="short_text">
-            <label for="college">Enter your college *</label>
-            <input type="text" name="college" id="college" required>
-        </div>
-        
-        <div class="short_text">
-            <label for="major">Enter your major *</label>
-            <input type="text" name="major" id="major" required>
-        </div>
-        
-        <div class="short_text">
-            <label for="job">Enter you occupation</label>
-            <input type="text" name="job" id="job">
-        </div>
+<body><div class="box">
+    
+        <form action="" method="post">
+            <div class="short_text">
+                <label for="fullname">Enter your full name *</label>
+                <input type="text" name="fullname" id="fullname" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="email">Enter your email id *</label>
+                <input type="text" name="email" id="email" pattern=".+@.+\..+" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="gradyear">Enter your grad year *</label>
+                <input type="text" name="gradyear" id="gradyear" pattern="20[0-9][0-9]" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="college">Enter your college *</label>
+                <input type="text" name="college" id="college" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="major">Enter your major *</label>
+                <input type="text" name="major" id="major" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="job">Enter you occupation</label>
+                <input type="text" name="job" id="job">
+            </div>
+    
+            <div class="short_text">
+                <label for="country">Enter your country of residence *</label>
+                <input type="text" name="country" id="country" required>
+            </div>
+    
+            <div class="short_text">
+                <label for="city">Enter your city of residence *</label>
+                <input type="text" name="city" id="city" required>
+            </div>
+    
+            <input type="submit" value="Submit">
+    
+            <div class="checked short_text">
+                <label for="mentor">Do you want to be a mentor</label>
+                <input type="checkbox" name="mentor" id="mentor" checked>
+            </div>
+            
 
-        <div class="short_text">
-            <label for="country">Enter your country of residence *</label>
-            <input type="text" name="country" id="country" required>
-        </div>
-
-        <div class="short_text">
-            <label for="city">Enter your city of residence *</label>
-            <input type="text" name="city" id="city" required>
-        </div>
-
-        
-
-        <label for="mentor">Do you want to be a mentor</label><input type="checkbox" name="menot" id="mentor" checked>
-        <input type="submit" value="Submit">
-    </form>
+        </form>
+</div>
 </body>
 </html>
