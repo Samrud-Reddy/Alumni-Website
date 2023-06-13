@@ -1,9 +1,6 @@
 import express, {NextFunction, Request, Response} from "express";
 import * as path from "path";
 import * as fs from "fs";
-// import * as d from ".\\data_helpers\\mysql.js";
-
-// let x: void = d.addUser("s");
 
 require("dotenv").config();
 
@@ -48,6 +45,7 @@ app.use("/callback", Callback);
 import {parseJwt, verify_google_JWT} from "./helper/jwt_funcs.js";
 import {States} from "./helper/states.js";
 import {verify} from "jsonwebtoken";
+import Connection from "mysql2/typings/mysql/lib/Connection.js";
 
 function verify_request(req: Request, res: Response, next: NextFunction) {
 	if (req.cookies.my_JWT) {

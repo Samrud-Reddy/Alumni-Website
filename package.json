@@ -24,6 +24,7 @@
     "express-openid-connect": "^2.16.0",
     "google-auth-library": "^8.8.0",
     "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.3",
     "tld-extract": "^2.1.0"

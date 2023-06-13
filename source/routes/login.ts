@@ -17,8 +17,25 @@ router.get("/signup", (req: Request, res) => {
 	res.render("login/signup");
 });
 
+import {verifyAndAddUser, user_interface} from "../data_helpers/mysql";
+
+// export interface user_interface {
+// 	name: string;
+// 	email: string;
+// 	gradyear: number;
+// 	college: string;
+// 	major: string;
+// 	job?: string;
+// 	country: string;
+// 	city: string;
+// 	mentor: boolean;
+// }
+
 router.post("/signup", (req: Request, res) => {
-	console.log(req.body);
+	let userInfo = req.body;
+
+	let correctedUser: user_interface = userInfo;
+
 	res.redirect("/login");
 });
 module.exports = router;

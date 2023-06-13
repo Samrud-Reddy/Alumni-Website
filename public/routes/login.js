@@ -17,8 +17,20 @@ router.get("/std-teach/:user", function (req, res) {
 router.get("/signup", function (req, res) {
     res.render("login/signup");
 });
+// export interface user_interface {
+// 	name: string;
+// 	email: string;
+// 	gradyear: number;
+// 	college: string;
+// 	major: string;
+// 	job?: string;
+// 	country: string;
+// 	city: string;
+// 	mentor: boolean;
+// }
 router.post("/signup", function (req, res) {
-    console.log(req.body);
+    var userInfo = req.body;
+    var correctedUser = userInfo;
     res.redirect("/login");
 });
 module.exports = router;
