@@ -34,8 +34,20 @@ import {verifyAndAddUser, user_interface} from "../data_helpers/mysql";
 router.post("/signup", (req: Request, res) => {
 	let userInfo = req.body;
 
-	let correctedUser: user_interface = userInfo;
+	if (userInfo.mentor) {
+		userInfo.mentor = true;
+	} else {
+		userInfo.mentor = false;
+	}
+	var correctedUser: user_interface = userInfo;
 
-	res.redirect("/login");
+	verifyAndAddUser(correctedUser).then((result) => {
+		console.log("\n", result, "\n");
+		if (result === "USER_EXISTS") {
+			res.render("login/signup", {user: correctedUser, alert: "user_exists"});
+		} else if (result === "redirect") {
+			res.redirect("/login");
+		}
+	});
 });
 module.exports = router;

@@ -17,6 +17,7 @@ router.get("/std-teach/:user", function (req, res) {
 router.get("/signup", function (req, res) {
     res.render("login/signup");
 });
+var mysql_1 = require("../data_helpers/mysql");
 // export interface user_interface {
 // 	name: string;
 // 	email: string;
@@ -30,7 +31,21 @@ router.get("/signup", function (req, res) {
 // }
 router.post("/signup", function (req, res) {
     var userInfo = req.body;
+    if (userInfo.mentor) {
+        userInfo.mentor = true;
+    }
+    else {
+        userInfo.mentor = false;
+    }
     var correctedUser = userInfo;
-    res.redirect("/login");
+    (0, mysql_1.verifyAndAddUser)(correctedUser).then(function (result) {
+        console.log("\n", result, "\n");
+        if (result === "USER_EXISTS") {
+            res.render("login/signup", { user: correctedUser, alert: "user_exists" });
+        }
+        else if (result === "redirect") {
+            res.redirect("/login");
+        }
+    });
 });
 module.exports = router;

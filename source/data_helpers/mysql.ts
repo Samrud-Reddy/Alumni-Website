@@ -26,25 +26,20 @@ export interface user_interface {
 	mentor: boolean;
 }
 
-export async function verifyAndAddUser(
-	user: user_interface
-): Promise<string[]> {
+export async function verifyAndAddUser(user: user_interface): Promise<string> {
 	return knex("users")
 		.select("*")
 		.where({email: user.email})
 		.then((rows: RowDataPacket[]) => {
 			if (rows.length !== 0) {
-				return ["USER_EXISTS"];
+				return "USER_EXISTS";
 			}
 
 			let resultOfSQL: any = knex("users").insert(user);
-			if (typeof resultOfSQL === "object") {
-				if (typeof resultOfSQL[0] === "number") {
-					return ["redirect"];
-				}
-			}
-			console.log(resultOfSQL, "\n", user);
-			return ["failed"];
+
+			console.log(resultOfSQL);
+
+			return "redirect";
 		});
 }
 

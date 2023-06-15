@@ -56,16 +56,11 @@ function verifyAndAddUser(user) {
                     .where({ email: user.email })
                     .then(function (rows) {
                     if (rows.length !== 0) {
-                        return ["USER_EXISTS"];
+                        return "USER_EXISTS";
                     }
                     var resultOfSQL = knex("users").insert(user);
-                    if (typeof resultOfSQL === "object") {
-                        if (typeof resultOfSQL[0] === "number") {
-                            return ["redirect"];
-                        }
-                    }
-                    console.log(resultOfSQL, "\n", user);
-                    return ["failed"];
+                    console.log(resultOfSQL);
+                    return "redirect";
                 })];
         });
     });
