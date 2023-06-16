@@ -55,6 +55,11 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 		let ggl_jwt_payload = parseJwt(req.cookies.JWT_from_ggl);
 
 		getRole(ggl_jwt_payload.email, ggl_jwt_payload.hd).then((role) => {
+			if ((role = "fail")) {
+				next();
+				return;
+			}
+
 			let my_JWT = sign(
 				{
 					email: ggl_jwt_payload.email,
