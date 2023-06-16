@@ -13,3 +13,11 @@ export interface user_interface {
 declare module "verifyAndAddUser" {
 	export function verifyAndAddUser(user: user_interface): Promise<string[]>;
 }
+
+declare module "isTeacher" {
+	export function isTeacher(email: string): Promise<boolean>;
+}
+
+declare module "isAlumini" {
+	export function isAlumini(email: string): Promise<boolean>;
+}

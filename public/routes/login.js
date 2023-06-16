@@ -11,8 +11,14 @@ router.get("/", function (req, res) {
 router.get("/alumini", function (req, res) {
     res.render("login/alumini");
 });
-router.get("/std-teach/:user", function (req, res) {
-    res.render("login/login_for_std_teach", { user: req.params.user });
+router.get("/std-teach/:user", function (req, res, next) {
+    if (req.params.user === "student") {
+        res.render("login/login_for_std_teach", { user: "student" });
+    }
+    else if (req.params.user === "faculty member") {
+        res.render("login/login_for_std_teach", { user: "faculty member" });
+    }
+    next();
 });
 router.get("/signup", function (req, res) {
     res.render("login/signup");
@@ -44,7 +50,7 @@ router.post("/signup", function (req, res) {
             res.render("login/signup", { user: correctedUser, alert: "user_exists" });
         }
         else if (result === "redirect") {
-            res.redirect("/login");
+            res.redirect("/login/alumini");
         }
     });
 });

@@ -83,7 +83,6 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 				get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
 
 				//todo, change role to something corrent
-				get_my_jwt_url = `${get_my_jwt_url}&role=jojo`;
 				console.log(get_my_jwt_url);
 				res.redirect(get_my_jwt_url);
 			} else {

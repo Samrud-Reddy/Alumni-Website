@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyAndAddUser = void 0;
+exports.isAlumini = exports.isTeacher = exports.verifyAndAddUser = void 0;
 require("dotenv").config();
 var knex = require("knex")({
     client: "mysql",
@@ -59,20 +59,45 @@ function verifyAndAddUser(user) {
                         return "USER_EXISTS";
                     }
                     var resultOfSQL = knex("users").insert(user);
-                    console.log(resultOfSQL);
-                    return "redirect";
+                    return resultOfSQL.then(function (rows) {
+                        return "redirect";
+                    });
                 })];
         });
     });
 }
 exports.verifyAndAddUser = verifyAndAddUser;
-var user = {
-    name: "Hello",
-    email: "usser@gmail.com",
-    gradyear: 2002,
-    college: "MIT",
-    major: "lit",
-    country: "ind",
-    city: "bng",
-    mentor: true,
-};
+function isTeacher(email) {
+    return __awaiter(this, void 0, void 0, function () {
+        var teachers;
+        return __generator(this, function (_a) {
+            teachers = knex("teachers").select("*").where({ email: email });
+            return [2 /*return*/, teachers.then(function (rows) {
+                    return rows.length > 0;
+                })];
+        });
+    });
+}
+exports.isTeacher = isTeacher;
+function isAlumini(email) {
+    return __awaiter(this, void 0, void 0, function () {
+        var teachers;
+        return __generator(this, function (_a) {
+            teachers = knex("users").select("*").where({ email: email });
+            return [2 /*return*/, teachers.then(function (rows) {
+                    return rows.length > 0;
+                })];
+        });
+    });
+}
+exports.isAlumini = isAlumini;
+// let user = {
+// 	name: "Hello",
+// 	email: "usser@gmail.com",
+// 	gradyear: 2002,
+// 	college: "MIT",
+// 	major: "lit",
+// 	country: "ind",
+// 	city: "bng",
+// 	mentor: true,
+// };

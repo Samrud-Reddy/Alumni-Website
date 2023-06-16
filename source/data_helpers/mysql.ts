@@ -36,20 +36,35 @@ export async function verifyAndAddUser(user: user_interface): Promise<string> {
 			}
 
 			let resultOfSQL: any = knex("users").insert(user);
-
-			console.log(resultOfSQL);
-
-			return "redirect";
+			return resultOfSQL.then((rows: RowDataPacket[]) => {
+				return "redirect";
+			});
 		});
 }
 
-let user = {
-	name: "Hello",
-	email: "usser@gmail.com",
-	gradyear: 2002,
-	college: "MIT",
-	major: "lit",
-	country: "ind",
-	city: "bng",
-	mentor: true,
-};
+export async function isTeacher(email: string): Promise<boolean> {
+	let teachers = knex("teachers").select("*").where({email: email});
+
+	return teachers.then((rows) => {
+		return rows.length > 0;
+	});
+}
+
+export async function isAlumini(email: string): Promise<boolean> {
+	let teachers = knex("users").select("*").where({email: email});
+
+	return teachers.then((rows) => {
+		return rows.length > 0;
+	});
+}
+
+// let user = {
+// 	name: "Hello",
+// 	email: "usser@gmail.com",
+// 	gradyear: 2002,
+// 	college: "MIT",
+// 	major: "lit",
+// 	country: "ind",
+// 	city: "bng",
+// 	mentor: true,
+// };
