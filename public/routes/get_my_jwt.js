@@ -84,7 +84,6 @@ function getRole(email, hd) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log(email);
                     admins = ["radomusefull@gmail.com"];
                     if (admins.includes(email)) {
                         return [2 /*return*/, "admin"];
@@ -113,7 +112,7 @@ router.get("/:id", function (req, res, next) {
         var role = req.params.role || "student";
         var ggl_jwt_payload_1 = (0, jwt_funcs_1.parseJwt)(req.cookies.JWT_from_ggl);
         getRole(ggl_jwt_payload_1.email, ggl_jwt_payload_1.hd).then(function (role) {
-            if ((role = "fail")) {
+            if (role === "fail") {
                 res.cookie("JWT_from_ggl", "fail", { maxAge: -10 });
                 res.send("Dont have a permission:- go to <a href = '" +
                     req.protocol +

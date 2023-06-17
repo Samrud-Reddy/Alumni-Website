@@ -14,10 +14,12 @@ const web_url: string = process.env.URL?.toString() || "localhost";
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 
-app.use((req, res, next) => {
-	console.log(req.url);
-	next();
-});
+// !debug mode
+// app.use((req, res, next) => {
+// 	console.log (req.url);
+// 	next();
+// });
+
 app.use(
 	express.urlencoded({
 		extended: true,
@@ -53,9 +55,8 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 		try {
 			verify(req.cookies.my_JWT, SECRET_KEY, {});
 
-			let my_jwt_tkn = parseJwt(req.cookies.my_JWT);
-
-			console.log(my_jwt_tkn);
+			//tests if the JWT token is valid
+			parseJwt(req.cookies.my_JWT);
 
 			next();
 			return;
@@ -73,7 +74,6 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 	if (req.cookies.JWT_from_ggl) {
 		//create a new JWT made by us, using googles JWT
 		verify_google_JWT(req.cookies.JWT_from_ggl).then((data) => {
-			console.log(data);
 			//valid jwt token
 			if (data) {
 				let state = States.add();
@@ -82,8 +82,6 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 
 				get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
 
-				//todo, change role to something corrent
-				console.log(get_my_jwt_url);
 				res.redirect(get_my_jwt_url);
 			} else {
 				res.send("FA ILED");

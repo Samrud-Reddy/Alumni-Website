@@ -45,7 +45,6 @@ router.post("/signup", function (req, res) {
     }
     var correctedUser = userInfo;
     (0, mysql_1.verifyAndAddUser)(correctedUser).then(function (result) {
-        console.log("\n", result, "\n");
         if (result === "USER_EXISTS") {
             res.render("login/signup", { user: correctedUser, alert: "user_exists" });
         }

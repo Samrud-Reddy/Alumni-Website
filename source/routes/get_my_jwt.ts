@@ -24,7 +24,6 @@ async function getRole(
 	email: string,
 	hd: string | undefined
 ): Promise<"admin" | "student" | "staff" | "alumini" | "fail"> {
-	console.log(email);
 	let admins = ["radomusefull@gmail.com"];
 
 	if (admins.includes(email)) {
@@ -55,7 +54,7 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 		let ggl_jwt_payload = parseJwt(req.cookies.JWT_from_ggl);
 
 		getRole(ggl_jwt_payload.email, ggl_jwt_payload.hd).then((role) => {
-			if ((role = "fail")) {
+			if (role === "fail") {
 				res.cookie("JWT_from_ggl", "fail", {maxAge: -10});
 
 				res.send(

@@ -47,7 +47,6 @@ router.post("/signup", (req: Request, res) => {
 	var correctedUser: user_interface = userInfo;
 
 	verifyAndAddUser(correctedUser).then((result) => {
-		console.log("\n", result, "\n");
 		if (result === "USER_EXISTS") {
 			res.render("login/signup", {user: correctedUser, alert: "user_exists"});
 		} else if (result === "redirect") {
