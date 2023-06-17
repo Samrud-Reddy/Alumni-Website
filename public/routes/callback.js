@@ -7,14 +7,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var router = express_1.default.Router();
 var states_js_1 = require("../helper/states.js");
+require("dotenv").config();
 var PORT = ((_a = process.env.PORT) === null || _a === void 0 ? void 0 : _a.toString()) || "3000";
-var url = "http://localhost:".concat(PORT);
+var url = "http://".concat(process.env.URL, ":").concat(PORT);
 var client_id = ((_b = process.env.CLIENT_ID) === null || _b === void 0 ? void 0 : _b.toString()) || "";
 var client_secret = ((_c = process.env.CLIENT_SECRET) === null || _c === void 0 ? void 0 : _c.toString()) || "";
 router.get("/", function (req, res, next) {
     var _a;
     var state = ((_a = req.query.state) === null || _a === void 0 ? void 0 : _a.toString()) || "";
-    if (states_js_1.States.has(state)) {
+    if (states_js_1.States.has(state, "ggl_jwt_token")) {
         states_js_1.States.remove(state);
         var x = fetch("https://oauth2.googleapis.com/token", {
             method: "POST",

@@ -1,10 +1,19 @@
-export let States: States;
-interface States {
-	add(): string;
-	has(x: string): boolean;
-	remove(x: string): void;
+type reason = "ggl_jwt_token" | "my_jwt_token";
+
+interface state_object {
+	time_of_creation: number;
+	used_for: reason;
+	stateId: string;
 }
 
-declare module "make_random_num" {
-	export function make_random_num(x?: number): string;
+interface State_class {
+	states: state_object[];
+	remove: (id: state_object | string) => void;
+	makeRandomNum: (lenght?: number) => string;
+	addState: (used_for: reason) => string;
+	has: (id: string, used_for: reason) => boolean;
+}
+
+declare module States {
+	export let States: State_class;
 }

@@ -16,7 +16,7 @@ app.set("views", __dirname + "\\view"); // set the directory for the view templa
 
 // !debug mode
 // app.use((req, res, next) => {
-// 	console.log (req.url);
+// 	console.log(req.url);
 // 	next();
 // });
 
@@ -47,7 +47,6 @@ app.use("/callback", Callback);
 import {parseJwt, verify_google_JWT} from "./helper/jwt_funcs.js";
 import {States} from "./helper/states.js";
 import {verify} from "jsonwebtoken";
-import Connection from "mysql2/typings/mysql/lib/Connection.js";
 
 function verify_request(req: Request, res: Response, next: NextFunction) {
 	if (req.cookies.my_JWT) {
@@ -76,9 +75,11 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 		verify_google_JWT(req.cookies.JWT_from_ggl).then((data) => {
 			//valid jwt token
 			if (data) {
-				let state = States.add();
+				let state = States.addState("my_jwt_token");
 
-				let get_my_jwt_url: string = `get_my_jwt/${state}?redirect_url=`;
+				let get_my_jwt_url: string = `get_my_jwt/${encodeURIComponent(
+					state
+				)}?redirect_url=`;
 
 				get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
 

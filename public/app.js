@@ -39,7 +39,7 @@ app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 // !debug mode
 // app.use((req, res, next) => {
-// 	console.log (req.url);
+// 	console.log(req.url);
 // 	next();
 // });
 app.use(express_1.default.urlencoded({
@@ -84,8 +84,8 @@ function verify_request(req, res, next) {
         (0, jwt_funcs_js_1.verify_google_JWT)(req.cookies.JWT_from_ggl).then(function (data) {
             //valid jwt token
             if (data) {
-                var state = states_js_1.States.add();
-                var get_my_jwt_url = "get_my_jwt/".concat(state, "?redirect_url=");
+                var state = states_js_1.States.addState("my_jwt_token");
+                var get_my_jwt_url = "get_my_jwt/".concat(encodeURIComponent(state), "?redirect_url=");
                 get_my_jwt_url = get_my_jwt_url + encodeURIComponent(req.url);
                 res.redirect(get_my_jwt_url);
             }

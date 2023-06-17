@@ -1,31 +1,6 @@
-import fs from "fs";
-
-function readStates(): string[] {
-	const contents = require("../../states.json");
-
-	return contents;
-}
-
-function appendStates(x: string): void {
-	let states = readStates();
-
-	states.push(x);
-
-	let json = JSON.stringify(states);
-
-	fs.writeFile(require.main?.path + "\\states.json", json, (err) => {
-		if (err) throw err;
-	});
-}
-
-function write(x: string): void {
-	fs.writeFile(require.main?.path + "\\states.json", x, (err) => {
-		if (err) throw err;
-	});
-}
-
 import {getRandomValues, createHash} from "crypto";
-export function make_random_num(x?: number): string {
+
+function make_random_num(x?: number): string {
 	let state: string;
 	let randomnumber = getRandomValues(new BigInt64Array(x || 16));
 
@@ -46,26 +21,79 @@ export function make_random_num(x?: number): string {
 	return state;
 }
 
-interface States {
-	add(): string;
-	has(x: string): boolean;
-	remove(x: string): void;
+//update declarations if changes are made
+type reason = "ggl_jwt_token" | "my_jwt_token";
+
+interface state_object {
+	time_of_creation: number;
+	used_for: reason;
+	stateId: string;
 }
 
-export let States: States = {
-	add(): string {
-		let x = make_random_num(16);
-		appendStates(x);
-		return x;
-	},
-	has(x: string): boolean {
-		let states = readStates();
-		return states.includes(x);
-	},
-	remove(x: string): void {
-		let states = readStates();
+export class State_class {
+	states: state_object[] = [];
 
-		states = states.filter((item: string) => item !== x);
-		write(JSON.stringify(states));
-	},
-};
+	public remove(id: state_object | string): void {
+		let index: number;
+
+		if (typeof id === "object") {
+			index = this.states.indexOf(id);
+		}
+
+		if (typeof id === "string") {
+			for (let item of this.states) {
+				if (item.stateId === id) {
+					index = this.states.indexOf(item);
+					break;
+				}
+			}
+		}
+
+		this.states.filter((state, i) => i !== index);
+	}
+
+	public makeRandomNum(lenght?: number): string {
+		return make_random_num(lenght);
+	}
+
+	public addState(used_for: reason): string {
+		let id = this.makeRandomNum(16);
+
+		let stateOBJ: state_object = {
+			time_of_creation: Date.now(),
+			used_for: used_for,
+			stateId: id,
+		};
+
+		this.states.push(stateOBJ);
+
+		return id;
+	}
+
+	public has(id: string, used_for: reason): boolean {
+		let inStates = false;
+		let toRemove: state_object[] = [];
+		for (let i = 0; i < this.states.length; i++) {
+			let currentStateObj: state_object = this.states[i];
+
+			let lifeTime = Date.now() - currentStateObj.time_of_creation;
+
+			if (lifeTime >= 10 * 60 * 1000) {
+				toRemove.push(this.states[i]);
+			} else if (
+				currentStateObj.stateId === id &&
+				currentStateObj.used_for === used_for
+			) {
+				inStates = true;
+			}
+		}
+
+		toRemove.forEach((element: state_object) => {
+			this.remove(element);
+		});
+
+		return inStates;
+	}
+}
+
+export let States: State_class = new State_class();

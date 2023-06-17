@@ -46,7 +46,7 @@ async function getRole(
 }
 
 router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
-	if (States.has(req.params.id)) {
+	if (States.has(req.params.id, "my_jwt_token")) {
 		States.remove(req.params.id);
 
 		const role: string = req.params.role || "student";
@@ -87,6 +87,8 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 
 			res.redirect(req.params.redirect_url || "/");
 		});
+	} else {
+		next();
 	}
 });
 module.exports = router;

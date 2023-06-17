@@ -2,17 +2,19 @@ import express, {Request, Response, NextFunction, Router} from "express";
 const router = express.Router();
 
 import {States} from "../helper/states.js";
+require("dotenv").config();
 
 const PORT: string = process.env.PORT?.toString() || "3000";
 
-const url = `http://localhost:${PORT}`;
+const url = `http://${process.env.URL}:${PORT}`;
 
 const client_id: string = process.env.CLIENT_ID?.toString() || "";
 const client_secret: string = process.env.CLIENT_SECRET?.toString() || "";
 
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
 	let state: string = req.query.state?.toString() || "";
-	if (States.has(state)) {
+
+	if (States.has(state, "ggl_jwt_token")) {
 		States.remove(state);
 		let x = fetch("https://oauth2.googleapis.com/token", {
 			method: "POST",

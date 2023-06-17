@@ -107,7 +107,7 @@ function getRole(email, hd) {
     });
 }
 router.get("/:id", function (req, res, next) {
-    if (states_1.States.has(req.params.id)) {
+    if (states_1.States.has(req.params.id, "my_jwt_token")) {
         states_1.States.remove(req.params.id);
         var role = req.params.role || "student";
         var ggl_jwt_payload_1 = (0, jwt_funcs_1.parseJwt)(req.cookies.JWT_from_ggl);
@@ -135,6 +135,9 @@ router.get("/:id", function (req, res, next) {
             });
             res.redirect(req.params.redirect_url || "/");
         });
+    }
+    else {
+        next();
     }
 });
 module.exports = router;

@@ -1,31 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.States = exports.make_random_num = void 0;
-var fs_1 = __importDefault(require("fs"));
-function readStates() {
-    var contents = require("../../states.json");
-    return contents;
-}
-function appendStates(x) {
-    var _a;
-    var states = readStates();
-    states.push(x);
-    var json = JSON.stringify(states);
-    fs_1.default.writeFile(((_a = require.main) === null || _a === void 0 ? void 0 : _a.path) + "\\states.json", json, function (err) {
-        if (err)
-            throw err;
-    });
-}
-function write(x) {
-    var _a;
-    fs_1.default.writeFile(((_a = require.main) === null || _a === void 0 ? void 0 : _a.path) + "\\states.json", x, function (err) {
-        if (err)
-            throw err;
-    });
-}
+exports.States = exports.State_class = void 0;
 var crypto_1 = require("crypto");
 function make_random_num(x) {
     var state;
@@ -43,20 +18,60 @@ function make_random_num(x) {
                 .toString();
     return state;
 }
-exports.make_random_num = make_random_num;
-exports.States = {
-    add: function () {
-        var x = make_random_num(16);
-        appendStates(x);
-        return x;
-    },
-    has: function (x) {
-        var states = readStates();
-        return states.includes(x);
-    },
-    remove: function (x) {
-        var states = readStates();
-        states = states.filter(function (item) { return item !== x; });
-        write(JSON.stringify(states));
-    },
-};
+var State_class = /** @class */ (function () {
+    function State_class() {
+        this.states = [];
+    }
+    State_class.prototype.remove = function (id) {
+        var index;
+        if (typeof id === "object") {
+            index = this.states.indexOf(id);
+        }
+        if (typeof id === "string") {
+            for (var _i = 0, _a = this.states; _i < _a.length; _i++) {
+                var item = _a[_i];
+                if (item.stateId === id) {
+                    index = this.states.indexOf(item);
+                    break;
+                }
+            }
+        }
+        this.states.filter(function (state, i) { return i !== index; });
+    };
+    State_class.prototype.makeRandomNum = function (lenght) {
+        return make_random_num(lenght);
+    };
+    State_class.prototype.addState = function (used_for) {
+        var id = this.makeRandomNum(16);
+        var stateOBJ = {
+            time_of_creation: Date.now(),
+            used_for: used_for,
+            stateId: id,
+        };
+        this.states.push(stateOBJ);
+        return id;
+    };
+    State_class.prototype.has = function (id, used_for) {
+        var _this = this;
+        var inStates = false;
+        var toRemove = [];
+        for (var i = 0; i < this.states.length; i++) {
+            var currentStateObj = this.states[i];
+            var lifeTime = Date.now() - currentStateObj.time_of_creation;
+            if (lifeTime >= 10 * 60 * 1000) {
+                toRemove.push(this.states[i]);
+            }
+            else if (currentStateObj.stateId === id &&
+                currentStateObj.used_for === used_for) {
+                inStates = true;
+            }
+        }
+        toRemove.forEach(function (element) {
+            _this.remove(element);
+        });
+        return inStates;
+    };
+    return State_class;
+}());
+exports.State_class = State_class;
+exports.States = new State_class();
