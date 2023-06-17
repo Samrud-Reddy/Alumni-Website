@@ -56,7 +56,16 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 
 		getRole(ggl_jwt_payload.email, ggl_jwt_payload.hd).then((role) => {
 			if ((role = "fail")) {
-				next();
+				res.cookie("JWT_from_ggl", "fail", {maxAge: -10});
+
+				res.send(
+					"Dont have a permission:- go to <a href = '" +
+						req.protocol +
+						"://" +
+						req.get("host") +
+						"/login" +
+						"'>Home</a>"
+				);
 				return;
 			}
 

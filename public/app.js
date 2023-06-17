@@ -110,7 +110,7 @@ var login = require("./routes/login.js");
 app.use("/login", login);
 app.listen(PORT, web_url, function () {
     console.log("Server is listening on " + web_url + " on " + PORT);
-    console.log("URL: ".concat(web_url + ":" + PORT));
+    console.log("URL: http://".concat(web_url + ":" + PORT));
 });
 app.use(function (req, res) {
     res.send("FAIL");

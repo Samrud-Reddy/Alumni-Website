@@ -114,7 +114,13 @@ router.get("/:id", function (req, res, next) {
         var ggl_jwt_payload_1 = (0, jwt_funcs_1.parseJwt)(req.cookies.JWT_from_ggl);
         getRole(ggl_jwt_payload_1.email, ggl_jwt_payload_1.hd).then(function (role) {
             if ((role = "fail")) {
-                next();
+                res.cookie("JWT_from_ggl", "fail", { maxAge: -10 });
+                res.send("Dont have a permission:- go to <a href = '" +
+                    req.protocol +
+                    "://" +
+                    req.get("host") +
+                    "/login" +
+                    "'>Home</a>");
                 return;
             }
             var my_JWT = (0, jsonwebtoken_1.sign)({

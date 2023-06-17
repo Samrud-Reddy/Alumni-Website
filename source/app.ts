@@ -108,7 +108,7 @@ app.use("/login", login);
 
 app.listen(PORT, web_url, () => {
 	console.log("Server is listening on " + web_url + " on " + PORT);
-	console.log(`URL: ${web_url + ":" + PORT}`);
+	console.log(`URL: http://${web_url + ":" + PORT}`);
 });
 
 app.use((req: Request, res: Response) => {
