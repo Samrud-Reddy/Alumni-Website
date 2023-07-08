@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
-import {States} from "../helper/states";
+import {States} from "../../helper/states";
 import {sign} from "jsonwebtoken";
-import {parseJwt} from "../helper/jwt_funcs";
+import {parseJwt} from "../../helper/jwt_funcs";
 
 const SECRET_KEY: string = process.env.SECRET_KEY || "";
 
@@ -19,7 +19,7 @@ function isFromInventure(hd: string | undefined): boolean {
 	return false;
 }
 
-import * as data from "../data_helpers/mysql";
+import * as data from "../../data_helpers/mysql";
 async function getRole(
 	email: string,
 	hd: string | undefined

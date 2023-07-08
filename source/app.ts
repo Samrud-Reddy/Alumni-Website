@@ -15,10 +15,10 @@ app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 
 // !debug mode
-app.use((req, res, next) => {
-	console.log(req.url);
-	next();
-});
+// app.use((req, res, next) => {
+// 	console.log(req.url);
+// 	next();
+// });
 
 app.use(
 	express.urlencoded({
@@ -38,10 +38,10 @@ app.use("*/scripts", express.static(path.join(__dirname, "scripts")));
 app.use(express.static(path.join(__dirname, "scripts")));
 
 //apps without verification requirments
-const google_login = require("./routes/google_login.js");
+const google_login = require("./routes/login/google_login.js");
 app.use("/google_login", google_login);
 
-const Callback = require("./routes/callback.js");
+const Callback = require("./routes/login/callback.js");
 app.use("/callback", Callback);
 
 import {parseJwt, verify_google_JWT} from "./helper/jwt_funcs.js";
@@ -95,15 +95,14 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 	res.redirect("login");
 }
 
-const get_my_jwt = require("./routes/get_my_jwt.js");
+const get_my_jwt = require("./routes/login/get_my_jwt.js");
 app.use("/get_my_jwt", get_my_jwt);
 
-//with auth requirments
+const login = require("./routes/login/login.js");
+app.use("/login", login);
+
 const Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
-
-const login = require("./routes/login.js");
-app.use("/login", login);
 
 app.listen(PORT, web_url, () => {
 	console.log("Server is listening on " + web_url + " on " + PORT);

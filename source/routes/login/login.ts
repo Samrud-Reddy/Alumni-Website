@@ -22,7 +22,7 @@ router.get("/signup", (req: Request, res) => {
 	res.render("login/signup");
 });
 
-import {verifyAndAddUser, user_interface} from "../data_helpers/mysql";
+import {verifyAndAddUser, user_interface} from "../../data_helpers/mysql";
 
 // export interface user_interface {
 // 	name: string;

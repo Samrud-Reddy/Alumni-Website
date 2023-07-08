@@ -6,6 +6,9 @@
     font-family: 'ubuntu', sans-serif;
 }
 
+button{
+    cursor: pointer;
+}
 
 .navbar {
 
@@ -97,6 +100,10 @@ h2{
     font-size: 2rem;
     padding: 1%;
     flex-grow: 1;
+
+    &:focus{
+        border: black 0.3rem solid;
+    }
 }
 
 .searchButton{
@@ -159,6 +166,8 @@ p{
     background-color: #FF6F01;
     border: #000 solid 0.4rem;
 
+    display:none;
+
 }
 
 .filterOptions{
@@ -219,5 +228,7 @@ label{
     top: 0px;
     height: 100vh;
     width: 100vw;
+
+    display: none;
 }
 

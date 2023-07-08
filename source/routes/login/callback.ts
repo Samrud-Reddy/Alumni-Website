@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction, Router} from "express";
 const router = express.Router();
 
-import {States} from "../helper/states.js";
+import {States} from "../../helper/states.js";
 require("dotenv").config();
 
 const PORT: string = process.env.PORT?.toString() || "3000";
