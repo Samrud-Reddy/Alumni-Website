@@ -15,10 +15,10 @@ app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 
 // !debug mode
-// app.use((req, res, next) => {
-// 	console.log(req.url);
-// 	next();
-// });
+app.use((req, res, next) => {
+	console.log(req.url);
+	next();
+});
 
 app.use(
 	express.urlencoded({

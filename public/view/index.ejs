@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= title %>
-    </title>
+    <title>Welcome to Inventures Alumni website</title>
+    <link rel="stylesheet" href="styles/main/welcome.css">
 
-    <link rel="stylesheet" href="styles/style.css">
-    <script src="scripts/home.js" defer></script>
-    <script src="jquery.js" async></script>
-    <link rel="icon" href="files/inv logo.png" type="image/x-icon">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="scripts/search_page.js"></script>
+
+
+    <div class="navbar">
+        <button class="PrimeryButton" disabled>Home Page</button>
+        <button class="PrimeryButton">Connect with your class</button>
+        <button class="PrimeryButton">Whats New</button>
+    </div>
+
 </head>
-
 <body>
-    <h1>You Are Logged in as <u><%=role%></u></h1>
-    <br>
-    <a href="http://localhost:3000/login">Logout</a>
-</body>
+    <div class="mainBody">
+        <h1>Welcome To Inventure Academy's Alumni Website</h1>
+        <h2>Find Your Alumni now!</h2>
 
+        <div class="searchbar">
+            <input type="text" name="Search" id="big_searchbar">
+            <button class="searchButton"><img class="searchimg" src="/files/search button.png" alt="Search"></button>
+            <button class="searchButton"><img class="searchimg" src="/files/filter.png" alt="Search" onclick="open_model(true)"></button>
+        </div>
+
+        <p>
+            You can search for alumnis based on Name, Email, graduation year, college, major, job, country, city.
+        </p>
+    </div>
+
+    <div class="filterPopup">
+        <h2><u>Filter Parameters</u></h2>
+        <div class="filterOptions">
+            <div class="smallText"><label for="name">Name</label><input type="text" name="name"></div>
+            <div class="smallText"><label for="year">Graduation year</label><input type="text" name="year"></div>
+            <div class="smallText"><label for="college">College</label><input type="text" name="college"></div>
+            <div class="smallText"><label for="major">major</label><input type="text" name="major"></div>
+            <div class="smallText"><label for="job">Ocupation</label><input type="text" name="job"></div>
+            <div class="smallText"><label for="country">Country</label><input type="text" name="country"></div>
+            <div class="smallText"><label for="city">City</label><input type="text" name="city"></div>
+        </div>
+        <button class="search">Search</button>
+
+    </div>
+    <div class="opacityHider" onclick="open_model(false)"></div>
+</body>
 </html>

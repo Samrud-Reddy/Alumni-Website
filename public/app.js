@@ -38,10 +38,10 @@ var web_url = ((_c = process.env.URL) === null || _c === void 0 ? void 0 : _c.to
 app.set("view engine", "ejs"); // set the view engine to EJS
 app.set("views", __dirname + "\\view"); // set the directory for the view templates
 // !debug mode
-// app.use((req, res, next) => {
-// 	console.log(req.url);
-// 	next();
-// });
+app.use(function (req, res, next) {
+    console.log(req.url);
+    next();
+});
 app.use(express_1.default.urlencoded({
     extended: true,
 }));

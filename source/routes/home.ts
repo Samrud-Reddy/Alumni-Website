@@ -5,7 +5,7 @@ import {parseJwt} from "../helper/jwt_funcs";
 router.get("/", (req: Request, res: Response) => {
 	let myJWTtkn = req.cookies.my_JWT;
 
-	const send = {role: parseJwt(myJWTtkn).role, title: "Logged in"};
+	const send = {role: parseJwt(myJWTtkn).role};
 
 	res.render("index", send);
 });

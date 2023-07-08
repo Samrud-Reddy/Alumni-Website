@@ -8,7 +8,7 @@ var router = express_1.default.Router();
 var jwt_funcs_1 = require("../helper/jwt_funcs");
 router.get("/", function (req, res) {
     var myJWTtkn = req.cookies.my_JWT;
-    var send = { role: (0, jwt_funcs_1.parseJwt)(myJWTtkn).role, title: "Logged in" };
+    var send = { role: (0, jwt_funcs_1.parseJwt)(myJWTtkn).role };
     res.render("index", send);
 });
 module.exports = router;
