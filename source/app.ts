@@ -104,6 +104,9 @@ app.use("/login", login);
 const Home = require("./routes/home.js");
 app.use("//", verify_request, Home);
 
+const search_results = require("./routes/search results.js");
+app.use("/results", verify_request, search_results);
+
 app.listen(PORT, web_url, () => {
 	console.log("Server is listening on " + web_url + " on " + PORT);
 	console.log(`URL: http://${web_url + ":" + PORT}`);
