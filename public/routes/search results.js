@@ -9,8 +9,10 @@ var mysql_1 = require("../data_helpers/mysql");
 var router = express_1.default.Router();
 var WordListCache = /** @class */ (function () {
     function WordListCache() {
-        var _this = this;
         this.words = [];
+    }
+    WordListCache.prototype.update = function () {
+        var _this = this;
         (0, mysql_1.getAllForCache)().then(function (results) {
             results = JSON.parse(JSON.stringify(results));
             for (var i in results) {
@@ -22,7 +24,7 @@ var WordListCache = /** @class */ (function () {
                 }
             }
         });
-    }
+    };
     return WordListCache;
 }());
 exports.wordCachList = new WordListCache();
@@ -38,5 +40,11 @@ router.get("/filter", function (req, res) {
 });
 router.get("/search", function (req, res) {
     var search = req.query.query;
+    exports.wordCachList.update();
 });
+var distance_between_words_1 = require("../helper/distance_between_words");
+var x = ["localy", "locely", "loccally", "locali"];
+for (var i in x) {
+    console.log((0, distance_between_words_1.distance)(x[i], "locally"));
+}
 module.exports = router;

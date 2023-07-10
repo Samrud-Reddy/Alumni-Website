@@ -7,6 +7,9 @@ class WordListCache {
 
 	constructor() {
 		this.words = [];
+	}
+
+	update() {
 		getAllForCache().then((results: any) => {
 			results = JSON.parse(JSON.stringify(results));
 
@@ -38,6 +41,14 @@ router.get("/filter", (req: Request, res: Response) => {
 
 router.get("/search", (req: Request, res: Response) => {
 	let search = req.query.query;
+
+	wordCachList.update();
 });
 
+import {distance} from "../helper/distance_between_words";
+let x = ["localy", "locely", "loccally", "locali"];
+
+for (let i in x) {
+	console.log(distance(x[i], "locally"));
+}
 module.exports = router;
