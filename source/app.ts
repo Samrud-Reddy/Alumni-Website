@@ -92,7 +92,7 @@ function verify_request(req: Request, res: Response, next: NextFunction) {
 		return;
 	}
 	//user not authenticated
-	res.redirect("login");
+	res.redirect("/login");
 }
 
 const get_my_jwt = require("./routes/login/get_my_jwt.js");

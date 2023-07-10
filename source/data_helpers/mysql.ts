@@ -58,6 +58,52 @@ export async function isAlumini(email: string): Promise<boolean> {
 	});
 }
 
+export interface searchParameters {
+	name?: string;
+	gradyear?: number;
+	college?: string;
+	major?: string;
+	job?: string;
+	country?: string;
+	city?: string;
+}
+
+export async function findAlumni(
+	searchParams: searchParameters
+): Promise<Knex.QueryBuilder> {
+	let fixedParms: any[][] = [];
+	let key: keyof searchParameters;
+	for (key in searchParams) {
+		if (searchParams[key] !== "") {
+			fixedParms.push([key, searchParams[key]]);
+		}
+	}
+
+	function andWhere(this: Knex.QueryBuilder) {
+		for (let i in fixedParms) {
+			let param = fixedParms[i];
+			this.orWhere(param[0], param[1]);
+		}
+	}
+
+	let results = knex("users")
+		.select("*")
+		.where({mentor: true})
+		.andWhere(andWhere);
+
+	return await results;
+}
+
+export async function getAllForCache(): Promise<any[]> {
+	return await knex("users").select(
+		"name",
+		"college",
+		"major",
+		"job",
+		"country",
+		"city"
+	);
+}
 // let user = {
 // 	name: "Hello",
 // 	email: "usser@gmail.com",

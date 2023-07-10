@@ -1,18 +1,43 @@
 import express, {Request, Response, NextFunction, Router} from "express";
+import {findAlumni, getAllForCache} from "../data_helpers/mysql";
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
-	res.send("results");
-});
+class WordListCache {
+	words: any[];
+
+	constructor() {
+		this.words = [];
+		getAllForCache().then((results: any) => {
+			results = JSON.parse(JSON.stringify(results));
+
+			for (let i in results) {
+				for (let j in results[i]) {
+					let label = j;
+					if (results[i][j] != "") {
+						this.words.push([label, results[i][j]]);
+					}
+				}
+			}
+		});
+	}
+}
+
+export let wordCachList = new WordListCache();
 
 router.get("/filter", (req: Request, res: Response) => {
 	let searchParams = req.query;
-	console.log(searchParams);
-	res.send("filter");
+	let results = findAlumni(searchParams);
+
+	results.then((result) => {
+		res.send(result);
+	});
+	for (let i in wordCachList.words) {
+		console.log(wordCachList.words[i]);
+	}
 });
 
 router.get("/search", (req: Request, res: Response) => {
-	res.send("search");
+	let search = req.query.query;
 });
 
 module.exports = router;

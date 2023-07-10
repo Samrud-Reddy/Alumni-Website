@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isAlumini = exports.isTeacher = exports.verifyAndAddUser = void 0;
+exports.getAllForCache = exports.findAlumni = exports.isAlumini = exports.isTeacher = exports.verifyAndAddUser = void 0;
 require("dotenv").config();
 var knex = require("knex")({
     client: "mysql",
@@ -91,6 +91,46 @@ function isAlumini(email) {
     });
 }
 exports.isAlumini = isAlumini;
+function findAlumni(searchParams) {
+    return __awaiter(this, void 0, void 0, function () {
+        function andWhere() {
+            for (var i in fixedParms) {
+                var param = fixedParms[i];
+                this.orWhere(param[0], param[1]);
+            }
+        }
+        var fixedParms, key, results;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    fixedParms = [];
+                    for (key in searchParams) {
+                        if (searchParams[key] !== "") {
+                            fixedParms.push([key, searchParams[key]]);
+                        }
+                    }
+                    results = knex("users")
+                        .select("*")
+                        .where({ mentor: true })
+                        .andWhere(andWhere);
+                    return [4 /*yield*/, results];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.findAlumni = findAlumni;
+function getAllForCache() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, knex("users").select("name", "college", "major", "job", "country", "city")];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.getAllForCache = getAllForCache;
 // let user = {
 // 	name: "Hello",
 // 	email: "usser@gmail.com",
