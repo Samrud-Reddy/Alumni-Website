@@ -120,11 +120,13 @@ function findAlumni(searchParams) {
     });
 }
 exports.findAlumni = findAlumni;
-function getAllForCache() {
+function getAllForCache(ord) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, knex("users").select("name", "college", "major", "job", "country", "city")];
+                case 0: return [4 /*yield*/, knex("users")
+                        .select("id", "name", "college", "major", "job", "country", "city")
+                        .where("id", ">", ord)];
                 case 1: return [2 /*return*/, _a.sent()];
             }
         });

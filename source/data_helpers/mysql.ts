@@ -94,15 +94,10 @@ export async function findAlumni(
 	return await results;
 }
 
-export async function getAllForCache(): Promise<any[]> {
-	return await knex("users").select(
-		"name",
-		"college",
-		"major",
-		"job",
-		"country",
-		"city"
-	);
+export async function getAllForCache(ord: number): Promise<any[]> {
+	return await knex("users")
+		.select("id", "name", "college", "major", "job", "country", "city")
+		.where("id", ">", ord);
 }
 // let user = {
 // 	name: "Hello",

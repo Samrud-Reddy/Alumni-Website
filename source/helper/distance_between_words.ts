@@ -1,4 +1,28 @@
+function WeShouldNotRunDistance(str1: string, str2: string): boolean {
+	let lstr1, lstr2;
+	str1 = str1.toLowerCase();
+	str2 = str2.toLowerCase();
+	lstr1 = str1.length;
+	lstr2 = str2.length;
+
+	if (Math.abs(lstr1 - lstr2) > 3) {
+		return true;
+	}
+
+	if (lstr1 >= 2 && lstr2 >= 2) {
+		if (str1.slice(0, 2) != str2.slice(0, 2)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 export function distance(str1: string, str2: string): number {
+	if (WeShouldNotRunDistance(str1, str2)) {
+		return 10;
+	}
+
 	let d = [];
 
 	let lstr1: number = str1.length;

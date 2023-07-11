@@ -101,11 +101,12 @@ app.use("/get_my_jwt", get_my_jwt);
 const login = require("./routes/login/login.js");
 app.use("/login", login);
 
+//verified request
 const Home = require("./routes/home.js");
-app.use("//", verify_request, Home);
+app.use("//", Home);
 
 const search_results = require("./routes/search results.js");
-app.use("/results", verify_request, search_results);
+app.use("/results", search_results);
 
 app.listen(PORT, web_url, () => {
 	console.log("Server is listening on " + web_url + " on " + PORT);

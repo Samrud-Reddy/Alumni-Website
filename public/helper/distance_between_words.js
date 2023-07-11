@@ -1,7 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.distance = void 0;
+function WeShouldNotRunDistance(str1, str2) {
+    var lstr1, lstr2;
+    str1 = str1.toLowerCase();
+    str2 = str2.toLowerCase();
+    lstr1 = str1.length;
+    lstr2 = str2.length;
+    if (Math.abs(lstr1 - lstr2) > 3) {
+        return true;
+    }
+    if (lstr1 >= 2 && lstr2 >= 2) {
+        if (str1.slice(0, 2) != str2.slice(0, 2)) {
+            return true;
+        }
+    }
+    return false;
+}
 function distance(str1, str2) {
+    if (WeShouldNotRunDistance(str1, str2)) {
+        return 10;
+    }
     var d = [];
     var lstr1 = str1.length;
     var lstr2 = str2.length;
