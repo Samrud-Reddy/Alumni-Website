@@ -19,13 +19,13 @@ body{
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
+
 
 
         .head{
             font-size: 4rem !important;
-            margin-block: 10%;
         }
 
 
@@ -40,7 +40,6 @@ body{
             border-radius: 1vh;
             font-weight: 700;
 
-            margin: 10%;
         }
         .button:hover{
             opacity: 80%;

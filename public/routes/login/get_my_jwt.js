@@ -130,7 +130,7 @@ router.get("/:id", function (req, res, next) {
                 role: role,
             }, SECRET_KEY, { algorithm: "HS256", expiresIn: "31d" });
             res.cookie("my_JWT", my_JWT, {
-                maxAge: 10 * 60 * 1000,
+                maxAge: 1000 * 60 * 60 * 24,
                 httpOnly: true,
             });
             res.redirect(req.params.redirect_url || "/");

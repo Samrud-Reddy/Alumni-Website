@@ -81,7 +81,7 @@ router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
 			);
 
 			res.cookie("my_JWT", my_JWT, {
-				maxAge: 10 * 60 * 1000,
+				maxAge: 1000 * 60 * 60 * 24, //ms min hour day 30days
 				httpOnly: true,
 			});
 
