@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="styles/main/welcome.css">
     <link rel="stylesheet" href="styles/main/navbar.css">
 
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script defer src="scripts/search_page.js"></script>
+    <script defer src="scripts/search_bar.js"></script>
 
 
     <div class="navbar">
@@ -52,5 +55,12 @@
 
     </div>
     <div class="opacityHider" onclick="open_model(false)"></div>
+
+    <script>
+            let showAlert = "<%=showAlert%>";
+            if (showAlert === "true") {
+                alert("No alumnus match your search query");
+                window.location.replace("/");}
+    </script>
 </body>
 </html>

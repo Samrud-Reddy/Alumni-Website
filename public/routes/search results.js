@@ -78,7 +78,7 @@ router.get("/filter", function (req, res) {
     var searchParams = req.query;
     var results = (0, mysql_1.findAlumni)(searchParams);
     results.then(function (result) {
-        res.send(result);
+        displayResults(req, res, result);
     });
 });
 router.get("/search", function (req, res) {
@@ -111,6 +111,11 @@ router.get("/search", function (req, res) {
     });
 });
 function displayResults(req, res, values) {
-    res.render("result.ejs", values);
+    if (values.length === 0) {
+        res.redirect("/?valuesEmpty=true");
+    }
+    else {
+        res.render("result.ejs", { values: JSON.stringify(values) });
+    }
 }
 module.exports = router;

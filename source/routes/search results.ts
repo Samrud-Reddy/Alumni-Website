@@ -93,7 +93,7 @@ router.get("/filter", (req: Request, res: Response) => {
 	let results = findAlumni(searchParams);
 
 	results.then((result) => {
-		res.send(result);
+		displayResults(req, res, result);
 	});
 });
 
@@ -143,7 +143,11 @@ router.get("/search", (req: Request, res: Response) => {
 });
 
 function displayResults(req: Request, res: Response, values: any) {
-	res.render("result.ejs", values);
+	if (values.length === 0) {
+		res.redirect("/?valuesEmpty=true");
+	} else {
+		res.render("result.ejs", {values: JSON.stringify(values)});
+	}
 }
 
 module.exports = router;
