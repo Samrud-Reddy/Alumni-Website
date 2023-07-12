@@ -71,7 +71,7 @@ class WordListCache {
 			for (let i in this.words) {
 				for (let keyword in this.words[i].SplitWords) {
 					keyword = this.words[i].SplitWords[keyword];
-					if (distance(keyword, currentword) <= 3) {
+					if (distance(keyword, currentword) <= 2) {
 						finalResponse.push({
 							catogery: this.words[i].label,
 							query: this.words[i].query,
@@ -102,6 +102,7 @@ router.get("/search", (req: Request, res: Response) => {
 	searchQuery = searchQuery.split(" ");
 
 	wordCachList.update();
+
 	let catogeries = wordCachList.match(searchQuery);
 
 	interface SearchParams {
@@ -137,8 +138,12 @@ router.get("/search", (req: Request, res: Response) => {
 			return indexOfElement === index;
 		});
 
-		res.send(values);
+		displayResults(req, res, values);
 	});
 });
+
+function displayResults(req: Request, res: Response, values: any) {
+	res.render("result.ejs", values);
+}
 
 module.exports = router;

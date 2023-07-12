@@ -59,7 +59,7 @@ var WordListCache = /** @class */ (function () {
             for (var i in this.words) {
                 for (var keyword in this.words[i].SplitWords) {
                     keyword = this.words[i].SplitWords[keyword];
-                    if ((0, distance_between_words_1.distance)(keyword, currentword) <= 3) {
+                    if ((0, distance_between_words_1.distance)(keyword, currentword) <= 2) {
                         finalResponse.push({
                             catogery: this.words[i].label,
                             query: this.words[i].query,
@@ -107,7 +107,10 @@ router.get("/search", function (req, res) {
             }
             return indexOfElement === index;
         });
-        res.send(values);
+        displayResults(req, res, values);
     });
 });
+function displayResults(req, res, values) {
+    res.render("result.ejs", values);
+}
 module.exports = router;

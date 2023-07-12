@@ -6,54 +6,6 @@
     font-family: 'ubuntu', sans-serif;
 }
 
-button{
-    cursor: pointer;
-}
-
-.navbar {
-
-    height: 4rem;
-    background-color: #FF6F01;
-    position: sticky;
-
-    border-bottom: 5px black solid;
-
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2vw;
-
-    padding-left: 2vw;
-    // border-bottom-left-radius: 10px;
-    // border-bottom-right-radius: 10px;
-}
-
-.PrimeryButton{
-    font-size: 1.3rem;
-    height: 2.2rem;
-    margin: 1rem;
-
-
-    padding-inline: 0.5rem;
-    
-    color: #fff;
-    background-color: #07519C;
-
-    border: black 0.2rem solid;
-    border-radius: 1rem;
-
-    &:disabled{
-        opacity: 60%;
-    }
-}
-.PrimeryButton:hover:not([disabled]){
-    background-color: #37699b;
-    // opacity: 80%;
-    box-shadow: 0px 0px 1px 2px rgb(0, 0, 0);
-
-}
-
 
 body{
     // background-color: #F3E8EE;

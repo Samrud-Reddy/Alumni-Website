@@ -15,6 +15,9 @@ function WeShouldNotRunDistance(str1, str2) {
             return true;
         }
     }
+    if (lstr1 <= 2 || lstr2 <= 2) {
+        return true;
+    }
     return false;
 }
 function distance(str1, str2) {

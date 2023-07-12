@@ -15,6 +15,10 @@ function WeShouldNotRunDistance(str1: string, str2: string): boolean {
 		}
 	}
 
+	if (lstr1 <= 2 || lstr2 <= 2) {
+		return true;
+	}
+
 	return false;
 }
 
