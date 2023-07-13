@@ -59,6 +59,7 @@ class WordListCache {
 					}
 				}
 			}
+
 			this.lastOrd = greatestOrd;
 		});
 	}
@@ -68,6 +69,7 @@ class WordListCache {
 
 		for (let currentword in keywords) {
 			currentword = keywords[currentword];
+
 			for (let i in this.words) {
 				for (let keyword in this.words[i].SplitWords) {
 					keyword = this.words[i].SplitWords[keyword];
@@ -89,6 +91,7 @@ let wordCachList = new WordListCache();
 wordCachList.update();
 
 router.get("/filter", (req: Request, res: Response) => {
+	wordCachList.update();
 	let searchParams = req.query;
 	let results = findAlumni(searchParams);
 
@@ -98,10 +101,9 @@ router.get("/filter", (req: Request, res: Response) => {
 });
 
 router.get("/search", (req: Request, res: Response) => {
+	wordCachList.update();
 	let searchQuery: string | string[] = req.query.query?.toString() || "";
 	searchQuery = searchQuery.split(" ");
-
-	wordCachList.update();
 
 	let catogeries = wordCachList.match(searchQuery);
 
@@ -146,7 +148,7 @@ function displayResults(req: Request, res: Response, values: any) {
 	if (values.length === 0) {
 		res.redirect("/?valuesEmpty=true");
 	} else {
-		res.render("result.ejs", {values: JSON.stringify(values)});
+		res.render("result.ejs", {values: values});
 	}
 }
 

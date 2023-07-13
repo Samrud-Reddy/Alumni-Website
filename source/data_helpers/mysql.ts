@@ -86,11 +86,7 @@ export async function findAlumni(
 		}
 	}
 
-	let results = knex("users")
-		.select("*")
-		.where({mentor: true})
-		.andWhere(andWhere);
-
+	let results = knex("users").select("*").andWhere(andWhere);
 	return await results;
 }
 

@@ -75,6 +75,7 @@ var WordListCache = /** @class */ (function () {
 var wordCachList = new WordListCache();
 wordCachList.update();
 router.get("/filter", function (req, res) {
+    wordCachList.update();
     var searchParams = req.query;
     var results = (0, mysql_1.findAlumni)(searchParams);
     results.then(function (result) {
@@ -83,9 +84,9 @@ router.get("/filter", function (req, res) {
 });
 router.get("/search", function (req, res) {
     var _a;
+    wordCachList.update();
     var searchQuery = ((_a = req.query.query) === null || _a === void 0 ? void 0 : _a.toString()) || "";
     searchQuery = searchQuery.split(" ");
-    wordCachList.update();
     var catogeries = wordCachList.match(searchQuery);
     var search_params = [];
     var currentParam = {};
@@ -115,7 +116,7 @@ function displayResults(req, res, values) {
         res.redirect("/?valuesEmpty=true");
     }
     else {
-        res.render("result.ejs", { values: JSON.stringify(values) });
+        res.render("result.ejs", { values: values });
     }
 }
 module.exports = router;

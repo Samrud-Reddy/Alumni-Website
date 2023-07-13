@@ -109,10 +109,7 @@ function findAlumni(searchParams) {
                             fixedParms.push([key, searchParams[key]]);
                         }
                     }
-                    results = knex("users")
-                        .select("*")
-                        .where({ mentor: true })
-                        .andWhere(andWhere);
+                    results = knex("users").select("*").andWhere(andWhere);
                     return [4 /*yield*/, results];
                 case 1: return [2 /*return*/, _a.sent()];
             }

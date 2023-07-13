@@ -27,7 +27,29 @@
         </span>
     </div>
 
-    <h1><%= values %></h1>
+    <div class="results">
+            <%for (i in values){%>
+                <div class="box">
+                    <h1><b><u><%-(values[i]["name"])%></u></b></h1>
+
+                    <div class="identifier">Went to college in <u><%= values[i]["college"] %></u> </div>
+                    <div class="identifier">Graduated in <u><%= values[i]["gradyear"] %></u> </div>
+                    <div class="identifier">Living in <u><%= values[i]["country"] %></u> in the city of <u><%= values[i]["city"] %></u></div>
+                    <div class="identifier">Majored in <u><%= values[i]["major"] %></u></div>
+                    <div class="identifier">
+                        <% if(values[i]["job"] === ""){ %>Currently unemployed
+                        <% } else{ %> Curretly employed as a <u><%=values[i]["job"] %></u> <% } %>
+                    </div>
+                    <div class="identifier">
+                        <% if(values[i]["mentor"] === 0){ %>Does not want to be a mentor
+                        <% } else{ %> Email is <u><%=values[i]["email"] %></u> <% } %>
+                    </div>
+                </div>
+            <%} %>
+
+    </div>
+
+    <script>let val = "<%=values%>";</script>
 
 </body>
 </html>

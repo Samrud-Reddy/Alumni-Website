@@ -66,3 +66,33 @@ body{
     color: #fff;
     height: 100vh;
 }
+
+
+.results{
+    display: flex;
+    flex-direction: column;
+    margin-inline: 10%;
+    margin-block: 2%;
+    gap: 5vh;
+
+    color: #000 ;
+}
+
+.box{
+    text-align: start;
+    background: #FF6F01;
+    border: black solid 5px;
+    border-radius: 2rem;
+
+    padding: 2%;
+    
+    >h1{
+        font-size: 3rem;
+        padding-bottom: 2%;
+    }
+}
+
+.identifier{
+    font-size: 2rem;
+    margin-block: 1%;
+}
