@@ -1,18 +1,11 @@
-*{
-    margin: 0%;
-    padding: 0%;
-}
-
 body {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100dvh;
-    background-image: url("/files/bgimage.jpg");
-    background-repeat: no-repeat, repeat;
-    background-size: cover;
-    background-position: center;
+
+    color: black;
 }
 
 
@@ -82,7 +75,7 @@ input[type="text"]{
 
 .box{
     background-color: #FF6F01;
-    width: clamp(300px, 30vw, 900px);
+    width: clamp(500px, 40vw, 900px);
 
     box-shadow: 0px 0px 10px 10px rgb(0, 0, 0);
     border-radius: 20px;

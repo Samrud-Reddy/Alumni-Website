@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/main/navbar.css">
 
  
-
+    <%- include("partials/background") %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script defer src="scripts/search_page.js"></script>
     <script defer src="scripts/search_bar.js"></script>
@@ -16,8 +16,8 @@
 
     <div class="navbar">
         <div class="buttons">
-            <button class="PrimeryButton">Home Page</button>
-            <button class="PrimeryButton">Connect with your class</button>
+            <button class="PrimeryButton" onclick="window.location.href = '/'">Home Page</button>
+            <button class="PrimeryButton" disabled>Connect with your class</button>
             <button class="PrimeryButton" disabled>Whats New</button>
         </div>
         <button class="searchButton"><img class="searchimg" src="/files/account.png" alt="acount" ></button>
