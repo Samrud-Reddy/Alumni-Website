@@ -30,13 +30,14 @@
         <h2>Find Your Alumni now!</h2>
 
         <div class="searchbar">
-            <input type="text" name="Search" id="big_searchbar" spellcheck="true">
+            <input type="text" name="Search" id="big_searchbar" spellcheck="true" placeholder="">
             <button class="searchButton"><img class="searchimg" src="/files/search button.png" alt="Search" onclick="searchFromBar()"></button>
             <button class="searchButton"><img class="searchimg" src="/files/new filter.png" alt="filter" onclick="open_model(true)"></button>
         </div>
 
         <p>
-            You can search for alumnis based on Name, Email, graduation year, college, major, job, country, city.
+            Search for Alumni based on Name, Graduation year, College, Major, Occupation,
+            <br>Country or City of residence.
         </p>
     </div>
 
@@ -59,7 +60,7 @@
     <script>
             let showAlert = "<%=showAlert%>";
             if (showAlert === "true") {
-                alert("No alumnus match your search query");
+                alert("No alumni match your search query");
                 window.location.replace("/");}
     </script>
 </body>
