@@ -50,6 +50,8 @@
 body{
     // background-color: #F3E8EE;
     height: 100vh;
+    overflow-x: hidden;
+    width: 100vw;
 }
 
 
@@ -58,9 +60,10 @@ body{
     flex-direction: column;
     margin-inline: 10%;
     margin-block: 2%;
+    padding-bottom: 5vh;
     gap: 5vh;
 
-    color: #000 ;
+    color: #000;
 }
 
 .box{
@@ -75,9 +78,28 @@ body{
         font-size: 3rem;
         padding-bottom: 2%;
     }
+    
 }
 
 .identifier{
     font-size: 2rem;
     margin-block: 1%;
+}
+/*       ScrollBar 1        */
+
+body::-webkit-scrollbar {
+    width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+  border: 3px solid transparent;
+   background-clip: content-box;
+    background-color: #07529c;
 }
