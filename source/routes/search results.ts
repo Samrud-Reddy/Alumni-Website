@@ -90,16 +90,6 @@ class WordListCache {
 let wordCachList = new WordListCache();
 wordCachList.update();
 
-router.get("/filter", (req: Request, res: Response) => {
-	wordCachList.update();
-	let searchParams = req.query;
-	let results = findAlumni(searchParams);
-
-	results.then((result) => {
-		displayResults(req, res, result);
-	});
-});
-
 router.get("/search", (req: Request, res: Response) => {
 	wordCachList.update();
 	let searchQuery: string | string[] = req.query.query?.toString() || "";

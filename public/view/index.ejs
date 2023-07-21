@@ -10,7 +10,6 @@
  
     <%- include("partials/background") %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script defer src="scripts/search_page.js"></script>
     <script defer src="scripts/search_bar.js"></script>
 
 
@@ -32,7 +31,6 @@
         <div class="searchbar">
             <input type="text" name="Search" id="big_searchbar" spellcheck="true" placeholder="">
             <button class="searchButton"><img class="searchimg" src="/files/search button.png" alt="Search" onclick="searchFromBar()"></button>
-            <button class="searchButton"><img class="searchimg" src="/files/new filter.png" alt="filter" onclick="open_model(true)"></button>
         </div>
 
         <p>
@@ -41,21 +39,7 @@
         </p>
     </div>
 
-    <div class="filterPopup">
-        <h2><u>Filter Parameters</u></h2>
-        <div class="filterOptions">
-            <div class="smallText"><label for="name">Name</label><input type="text" name="name"></div>
-            <div class="smallText"><label for="gradyear">Graduation year</label><input type="text" name="gradyear"></div>
-            <div class="smallText"><label for="college">College</label><input type="text" name="college"></div>
-            <div class="smallText"><label for="major">major</label><input type="text" name="major"></div>
-            <div class="smallText"><label for="job">Ocupation</label><input type="text" name="job"></div>
-            <div class="smallText"><label for="country">Country</label><input type="text" name="country"></div>
-            <div class="smallText"><label for="city">City</label><input type="text" name="city"></div>
-        </div>
-        <button class="search" onclick="searchFromFilter()">Search</button>
 
-    </div>
-    <div class="opacityHider" onclick="open_model(false)"></div>
 
     <script>
             let showAlert = "<%=showAlert%>";

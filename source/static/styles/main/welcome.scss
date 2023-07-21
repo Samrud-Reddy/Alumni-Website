@@ -79,44 +79,9 @@ p{
 
 }
 
-.filterPopup{
-    // display: none;
-
-    z-index: 10;
-    position: absolute;
 
 
-    color: #000;
-    top: 0;
 
-    height: max(65%, 450px);
-    
-    width: clamp(600px, 50vw, 1300px);
-
-    left: 50%;  
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-
-    background-color: #FF6F01;
-    border: #000 solid 0.4rem;
-
-    display:none;
-
-}
-
-.filterOptions{
-    width: max(65%, 500px);
-    z-index: 11;
-    margin: auto;
-    height: 70%;
-    margin-top: 1%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-}
 .smallText{
     display: flex;
     justify-content: space-between;
@@ -152,18 +117,5 @@ label{
     &:hover{
         opacity: 70%;
     }
-}
-
-
-.opacityHider{
-    z-index: 9;
-    opacity: 30%;
-    background-color: #fff;
-    position: absolute;
-    top: 0px;
-    height: 100vh;
-    width: 100vw;
-
-    display: none;
 }
 
