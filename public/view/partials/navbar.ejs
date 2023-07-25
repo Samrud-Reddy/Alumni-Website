@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="styles/main/navbar.css">
+<link rel="stylesheet" href="styles/main/account.css">
+
 <script defer src="scripts/search_bar.js"></script>
 
 <div class="navbar">
@@ -12,6 +14,14 @@
         <button class="searchButton"><img class="searchimg" src="/files/search button.png" alt="Search" onclick="searchFromBar()"></button>
     </div>
 
-    <button class="searchButton acount"><img class="searchimg" src="/files/new account.png" alt="acount" ></button>
+    <div class="searchButton acount dropdown">
+        <img class="searchimg dropbtn" src="/files/new account.png" alt="acount" >
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+    </div>
+    
 
 </div>

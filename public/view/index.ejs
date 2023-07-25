@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Inventures Alumni website</title>
     <link rel="stylesheet" href="styles/main/welcome.css">
-    <link rel="stylesheet" href="styles/main/navbar.css">
+    <link rel="stylesheet" href="styles/main/account.css">
 
  
     <%- include("partials/background") %>
@@ -19,7 +19,14 @@
             <button class="PrimeryButton" disabled>Connect with your class</button>
             <button class="PrimeryButton" disabled>Whats New</button>
         </div>
-        <button class="searchButton"><img class="searchimg" src="/files/account.png" alt="acount" ></button>
+        <div class="searchButton acount dropdown">
+            <img class="searchimg dropbtn" src="/files/new account.png" alt="acount" >
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+        </div>
     </div>
 
 </head>

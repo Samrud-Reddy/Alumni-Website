@@ -58,8 +58,6 @@ h2{
     opacity: 50%;
 }
 
-
-
 p{
     font-size: 2rem;
 }
@@ -78,8 +76,6 @@ p{
     justify-content: space-evenly;
 
 }
-
-
 
 
 .smallText{
@@ -119,3 +115,68 @@ label{
     }
 }
 
+
+//nav bar
+button{
+    cursor: pointer;
+}
+
+.navbar {
+    background-color: #FF6F01;
+    position: sticky;
+    top: 0px;
+    box-sizing: border-box;
+    border-bottom: 5px black solid;
+
+    
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, auto) 1fr auto 0.1fr auto;
+
+    justify-content: center;
+    align-items: center;
+
+    padding-inline: 1vw;
+    height: calc(4rem + 5px);
+    width: 100vw;
+}
+
+
+.PrimeryButton{
+    font-size: min(2vw, 1.3rem);
+    height: 2.2rem;
+    margin: 1rem;
+
+    padding-inline: 0.5rem;
+}
+
+// Styles
+.PrimeryButton{
+    color: #fff;
+    background-color: #07519C;
+
+    border: black 0.2rem solid;
+    border-radius: 1rem;
+
+    &:disabled{
+        opacity: 60%;
+    }
+}
+
+.PrimeryButton:hover:not([disabled]){
+    background-color: #37699b;
+    // opacity: 80%;
+    box-shadow: 0px 0px 1px 2px rgb(0, 0, 0);
+}
+
+.acount{
+    grid-column: 7;
+    border: solid black 5px;
+    box-sizing: border-box !important;
+    height: 3.5rem !important;
+    border-radius: 1rem;
+
+    background-color: #07529c;
+
+    position: relative;
+}
