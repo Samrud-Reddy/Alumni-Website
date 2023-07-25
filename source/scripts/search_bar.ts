@@ -37,3 +37,35 @@ function searchFromBar() {
 
 	window.location.href = curr_url.toString();
 }
+
+var isModalOpen = false;
+
+$(".acount").on("click", function (e) {
+	e.stopPropagation();
+	isModalOpen = !isModalOpen;
+	showModel(isModalOpen);
+});
+
+$(document).on("click", function (e) {
+	isModalOpen = false;
+	showModel(isModalOpen);
+});
+
+$(".acount").hover(
+	() => {
+		showModel(true);
+	},
+	() => {
+		if (!isModalOpen) {
+			showModel(false);
+		}
+	}
+);
+
+function showModel(show: boolean) {
+	if (show) {
+		$(".dropdown-content").show();
+		return;
+	}
+	$(".dropdown-content").hide();
+}
