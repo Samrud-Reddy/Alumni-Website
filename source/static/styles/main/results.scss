@@ -1,51 +1,6 @@
-.searchbar{
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    
-    height: 3rem;
-    gap: 2%;
-    width: 30vw;
-}
 
-#big_searchbar{
 
-    color: #fff;
-    background-color: #07529c;
 
-    border: black 0.2rem solid;
-    border-radius: 1rem;
-
-    outline: none;
-
-    font-size: 1.2rem;
-    padding: 1%;
-    flex-grow: 1;
-
-    &:focus{
-        border: black 0.3rem solid;
-    }
-}
-
-.searchButton{
-    height: 3rem;
-    aspect-ratio : 1/1;
-    // background-color: #F3E8EE;
-    background-color: transparent;
-    border: none;
-    align-self: center;
-
-}
-
-.wrap{
-    display: flex;
-    justify-content: space-between;
-    gap: 8%;
-}
-
-.acount{
-    box-sizing: content-box;
-}
 
 body{
     // background-color: #F3E8EE;

@@ -74,14 +74,6 @@ var WordListCache = /** @class */ (function () {
 }());
 var wordCachList = new WordListCache();
 wordCachList.update();
-router.get("/filter", function (req, res) {
-    wordCachList.update();
-    var searchParams = req.query;
-    var results = (0, mysql_1.findAlumni)(searchParams);
-    results.then(function (result) {
-        displayResults(req, res, result);
-    });
-});
 router.get("/search", function (req, res) {
     var _a;
     wordCachList.update();
