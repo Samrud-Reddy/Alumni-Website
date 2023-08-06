@@ -103,6 +103,11 @@ var get_my_jwt = require("./routes/login/get_my_jwt.js");
 app.use("/get_my_jwt", get_my_jwt);
 var login = require("./routes/login/login.js");
 app.use("/login", login);
+app.get("/logout", function (req, res) {
+    res.cookie("my_JWT", "Random string, does not maatter since cookie will be deleted", { maxAge: -3000 });
+    res.cookie("JWT_from_ggl", "Random string, does not maatter since cookie will be deleted", { maxAge: -3000 });
+    res.redirect("/login");
+});
 //verified request
 var Home = require("./routes/home.js");
 app.use("//", verify_request, Home);

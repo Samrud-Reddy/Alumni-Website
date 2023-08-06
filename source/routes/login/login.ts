@@ -50,7 +50,7 @@ router.post("/signup", (req: Request, res) => {
 		if (result === "USER_EXISTS") {
 			res.render("login/signup", {user: correctedUser, alert: "user_exists"});
 		} else if (result === "redirect") {
-			res.redirect("/login/alumini");
+			res.redirect("/google_login");
 		}
 	});
 });

@@ -49,7 +49,7 @@ router.post("/signup", function (req, res) {
             res.render("login/signup", { user: correctedUser, alert: "user_exists" });
         }
         else if (result === "redirect") {
-            res.redirect("/login/alumini");
+            res.redirect("/google_login");
         }
     });
 });
