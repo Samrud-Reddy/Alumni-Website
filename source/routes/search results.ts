@@ -130,6 +130,7 @@ router.get("/search", (req: Request, res: Response) => {
 			return indexOfElement === index;
 		});
 
+		console.log(values);
 		displayResults(req, res, values);
 	});
 });
