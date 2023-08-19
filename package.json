@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run run_once",
     "build_tsc": "tsc",
     "watch_tsc": "tsc -w",
     "run_once": "node public/app.js",
